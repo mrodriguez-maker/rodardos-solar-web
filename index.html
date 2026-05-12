@@ -48,7 +48,7 @@
   }
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
   .tastiota-main-grid {
@@ -140,9 +140,10 @@
 
     .diff-grid { grid-template-columns: 1fr; }
 
-    .form-layout { grid-template-columns: 1fr; gap: 40px; }
-    .form-fields { grid-template-columns: 1fr; }
+    .form-layout { grid-template-columns: 1fr !important; gap: 40px; }
+    .form-fields { grid-template-columns: 1fr !important; padding: 24px !important; }
     .form-fields .field { grid-column: auto !important; }
+    .form-fields button[type="submit"] { grid-column: auto !important; }
 
     .footer-inner { flex-direction: column !important; align-items: flex-start !important; gap: 16px; }
     .footer-meta { flex-direction: column !important; gap: 8px !important; }
@@ -290,7 +291,7 @@ const VariantColorStandalone = () => {
                 <span style={{ backgroundImage:'linear-gradient(90deg, #8FC4F3 0%, #4A87FF 100%)', WebkitBackgroundClip:'text', backgroundClip:'text', color:'transparent', fontStyle:'italic' }}>watt</span> de tu parque.
               </h1>
               <p style={{ fontSize:'clamp(16px,1.4vw,19px)', lineHeight:1.55, maxWidth:580, opacity:0.88, marginBottom:40 }}>
-                Limpieza, vegetación y drones para parques solares a gran escala.
+                Deshierbe especializado y limpieza de paneles para parques solares a gran escala.
                 Operación medible — performance ratio, soiling, tiempos de respuesta —
                 reportada al asset manager cada semana.
               </p>
@@ -356,17 +357,17 @@ const VariantColorStandalone = () => {
             <div>
               <div style={{ fontSize:12, fontFamily:'var(--font-mono)', color:'var(--cielo)', letterSpacing:'0.12em', marginBottom:16 }}>// SERVICIOS.json</div>
               <h2 style={{ fontSize:'clamp(36px,5.5vw,72px)', lineHeight:0.92, fontWeight:800, letterSpacing:'-0.03em' }}>
-                Tres servicios.<br/>
+                Deshierbe y limpieza.<br/>
                 <span style={{ backgroundImage:'linear-gradient(90deg, #8FC4F3, #4A87FF)', WebkitBackgroundClip:'text', backgroundClip:'text', color:'transparent' }}>Un solo SLA.</span>
               </h2>
             </div>
-            <div style={{ fontFamily:'var(--font-mono)', fontSize:12, color:'var(--cielo)', letterSpacing:'0.08em' }}>[03 / 03 ACTIVOS]</div>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:12, color:'var(--cielo)', letterSpacing:'0.08em' }}>[02 / 02 ACTIVOS]</div>
           </div>
           <div className="services-grid">
             {SERVICES.map((s, i) => {
               const I = s.icon;
-              const photo = i === 0 ? P.panelAngle : i === 1 ? P.workerRow : P.tracker;
-              const accent = i === 0 ? 'var(--cielo)' : i === 1 ? '#7AA8FF' : '#A5C9FF';
+              const photo = i === 0 ? P.workerTrimmer : P.panelAngle;
+              const accent = i === 0 ? 'var(--cielo)' : '#7AA8FF';
               return (
                 <article key={i} style={{ background:'linear-gradient(180deg, rgba(143,196,243,0.08) 0%, rgba(143,196,243,0.02) 100%)', border:'1px solid rgba(143,196,243,0.2)', borderTop:`3px solid ${accent}`, display:'flex', flexDirection:'column' }}>
                   <div style={{ position:'relative', height:200, overflow:'hidden' }}>

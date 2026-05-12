@@ -114,28 +114,20 @@ const Icon = {
 // ============ SHARED DATA ============
 const SERVICES = [
   {
-    icon: Icon.Panel,
-    title: 'Limpieza de paneles',
-    sub: 'Robótica + manual',
-    body: 'Equipos certificados por fabricante. Limpieza con o sin agua según topografía y disponibilidad hídrica. No invalidamos garantías.',
-    tags: ['Robots autónomos', 'Cepillado certificado', 'Recuperación de PR'],
-    photo: PHOTOS.cleaning,
-  },
-  {
     icon: Icon.Leaf,
     title: 'Control de vegetación y caminos',
-    sub: 'Manejo perimetral e interno',
-    body: 'Deshierbe selectivo, mantenimiento de terracerías y caminos internos. Prevención de sombras parásitas y riesgo de incendio.',
-    tags: ['Deshierbe selectivo', 'Bacheo y nivelación', 'Plan ambiental'],
+    sub: 'Deshierbe especializado',
+    body: 'Deshierbe selectivo mecanizado y manual, control perimetral e interno, mantenimiento de terracerías y caminos. Eliminamos sombras parásitas y riesgo de incendio con equipo propio.',
+    tags: ['Deshierbe mecanizado', 'Control perimetral', 'Terracerías y caminos', 'Plan ambiental'],
     photo: PHOTOS.field,
   },
   {
-    icon: Icon.Drone,
-    title: 'Inspección con drones',
-    sub: 'Termografía aérea + IV',
-    body: 'Vuelos termográficos y de espectro visible. Detectamos hot-spots, módulos en desviación y fallas de string sin interrumpir generación.',
-    tags: ['Termografía radiométrica', 'Mapeo ortomosaico', 'Reporte por módulo'],
-    photo: PHOTOS.drone,
+    icon: Icon.Panel,
+    title: 'Limpieza de paneles',
+    sub: 'Certificada por fabricante',
+    body: 'Limpieza con o sin agua según topografía y disponibilidad hídrica. Cumplimos especificaciones técnicas de Canadian Solar — no invalidamos garantías de módulo.',
+    tags: ['Cepillado certificado', 'Recuperación de PR', 'Sin invalidar garantía'],
+    photo: PHOTOS.cleaning,
   },
 ];
 

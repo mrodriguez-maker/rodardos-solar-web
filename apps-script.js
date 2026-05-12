@@ -1,12 +1,12 @@
 // ============================================================
 // RODARDOS Solar — Apps Script Web App
-// Pega este código en: Extensions > Apps Script dentro del
-// Google Sheet "RODARDOS Solar — Cotizaciones"
-// Luego: Deploy > New deployment > Web app
-//   - Execute as: Me
-//   - Who has access: Anyone
-// Copia la URL del deployment y pégala en index.html donde
-// dice APPS_SCRIPT_URL
+// 1. Abre el Sheet "RODARDOS Solar — Cotizaciones" en Drive
+// 2. Extensiones > Apps Script
+// 3. Reemplaza todo el código con este
+// 4. Guardar > Implementar > Nueva implementación
+//    - Tipo: App web
+//    - Ejecutar como: Yo
+//    - Acceso: Cualquier usuario
 // ============================================================
 
 const SHEET_NAME = 'Sheet1';
@@ -14,32 +14,26 @@ const SHEET_NAME = 'Sheet1';
 function doPost(e) {
   try {
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
-    const data = JSON.parse(e.postData.contents);
 
     sheet.appendRow([
       new Date().toLocaleString('es-MX'),
-      data.proyecto   || '',
-      data.empresa    || '',
-      data.rol        || '',
-      data.mw         || '',
-      data.mod        || '',
-      data.estado     || '',
-      data.fecha      || '',
-      data.email      || '',
+      e.parameter.proyecto || '',
+      e.parameter.empresa  || '',
+      e.parameter.rol      || '',
+      e.parameter.mw       || '',
+      e.parameter.mod      || '',
+      e.parameter.estado   || '',
+      e.parameter.fecha    || '',
+      e.parameter.email    || '',
     ]);
 
     return ContentService
-      .createTextOutput(JSON.stringify({ result: 'ok' }))
-      .setMimeType(ContentService.MimeType.JSON);
+      .createTextOutput('ok')
+      .setMimeType(ContentService.MimeType.TEXT);
 
   } catch (err) {
     return ContentService
-      .createTextOutput(JSON.stringify({ result: 'error', error: err.message }))
-      .setMimeType(ContentService.MimeType.JSON);
+      .createTextOutput('error: ' + err.message)
+      .setMimeType(ContentService.MimeType.TEXT);
   }
-}
-
-// Permite CORS desde cualquier origen
-function doOptions(e) {
-  return ContentService.createTextOutput('').setMimeType(ContentService.MimeType.TEXT);
 }

@@ -538,14 +538,14 @@ const VariantColorStandalone = () => {
                 ].join('\n');
                 window.open('https://wa.me/526221690609?text=' + encodeURIComponent(msg), '_blank');
 
-                // 2. Google Sheet (requiere Apps Script desplegado — ver apps-script.js)
+                // 2. Google Sheet
                 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxoSQMsRB7mfOk6lHUoQAxo7BYvaZqOqv3S-1JVsM9SdpwMOt7Rd-jAXMypdAx7c-g9ZQ/exec';
-                if (APPS_SCRIPT_URL) {
-                  fetch(APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(d),
-                  }).catch(() => {});
-                }
+                fetch(APPS_SCRIPT_URL, {
+                  method: 'POST',
+                  mode: 'no-cors',
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                  body: new URLSearchParams(d).toString(),
+                }).catch(() => {});
 
                 e.target.reset();
               }}

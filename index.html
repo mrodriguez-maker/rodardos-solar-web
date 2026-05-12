@@ -508,14 +508,44 @@ const VariantColorStandalone = () => {
               </p>
               <div style={{ padding:24, background:'linear-gradient(135deg, rgba(143,196,243,0.12), rgba(143,196,243,0.02))', border:'1px solid rgba(143,196,243,0.3)', borderTop:'3px solid var(--cielo)' }}>
                 <div style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'var(--cielo)', letterSpacing:'0.1em', marginBottom:12 }}>CONTACTO.directo</div>
-                <div style={{ fontSize:18, fontWeight:600 }}>solar@rodardos.com</div>
-                <div style={{ fontSize:14, opacity:0.8, marginTop:4 }}>+52 622 000 0000 · Guaymas, Sonora</div>
+                <div style={{ fontSize:18, fontWeight:600 }}>mrodriguez@rodardos.com</div>
+                <div style={{ fontSize:14, opacity:0.8, marginTop:4 }}>+52 622 169 0609 · Guaymas, Sonora</div>
               </div>
             </div>
             <form
               className="form-fields"
               style={{ background:'linear-gradient(135deg, rgba(143,196,243,0.08), rgba(74,135,255,0.04))', border:'1px solid rgba(143,196,243,0.25)', padding:40, backdropFilter:'blur(8px)', alignContent:'start' }}
-              onSubmit={(e) => { e.preventDefault(); alert('Cotización enviada — en 48 h nos comunicamos contigo.'); }}
+              onSubmit={(e) => {
+                e.preventDefault();
+                const fd = new FormData(e.target);
+                const d = Object.fromEntries(fd.entries());
+
+                // 1. WhatsApp
+                const msg = [
+                  '🌞 *SOLICITUD DE COTIZACIÓN — RODARDOS Solar*',
+                  '',
+                  `📋 *Proyecto:* ${d.proyecto || '—'}`,
+                  `🏢 *Empresa:* ${d.empresa || '—'}`,
+                  `👤 *Rol:* ${d.rol || '—'}`,
+                  `⚡ *Capacidad:* ${d.mw || '—'} MW`,
+                  `🔢 *Módulos:* ${d.mod || '—'}`,
+                  `📍 *Estado:* ${d.estado || '—'}`,
+                  `📅 *Fecha objetivo:* ${d.fecha || '—'}`,
+                  `📧 *Email:* ${d.email || '—'}`,
+                ].join('\n');
+                window.open('https://wa.me/526221690609?text=' + encodeURIComponent(msg), '_blank');
+
+                // 2. Google Sheet (requiere Apps Script desplegado — ver apps-script.js)
+                const APPS_SCRIPT_URL = '';
+                if (APPS_SCRIPT_URL) {
+                  fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(d),
+                  }).catch(() => {});
+                }
+
+                e.target.reset();
+              }}
             >
               {[
                 ['proyecto', 'NOMBRE_PROYECTO', 'Ej. Parque Solar Caracolí', 'span 2'],

@@ -13,7 +13,7 @@ const SHEET_NAME = 'Sheet1';
 
 function doPost(e) {
   try {
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
 
     sheet.appendRow([
       new Date().toLocaleString('es-MX'),

@@ -551,14 +551,14 @@ const VariantColorStandalone = () => {
               }}
             >
               {[
-                ['proyecto', 'NOMBRE_PROYECTO', 'Ej. Parque Solar Caracolí', 'span 2'],
-                ['empresa',  'EMPRESA',         'Reverau',                   null    ],
-                ['rol',      'ROL',             'Asset manager',             null    ],
-                ['mw',       'CAPACIDAD_MW',    '180',                       null    ],
-                ['mod',      'N_MÓDULOS',       '288580',                    null    ],
-                ['estado',   'ESTADO',          'Sonora',                    null    ],
-                ['fecha',    'FECHA_OBJETIVO',  '',                          null    ],
-                ['email',    'EMAIL',           'contacto@empresa.com',      'span 2'],
+                ['proyecto', 'NOMBRE DEL PROYECTO', 'Ej. Parque Solar Caracolí',  'span 2'],
+                ['empresa',  'EMPRESA',            'Nombre de tu empresa',       null    ],
+                ['rol',      'ROL',                'Ej. Gerente de operaciones', null    ],
+                ['mw',       'CAPACIDAD (MW)',      'Ej. 180',                    null    ],
+                ['mod',      'NO. DE MÓDULOS',      'Ej. 288,580',               null    ],
+                ['estado',   'ESTADO',              'Ej. Sonora',                null    ],
+                ['fecha',    'FECHA OBJETIVO',      '',                           null    ],
+                ['email',    'CORREO ELECTRÓNICO',  'contacto@tuempresa.com',     'span 2'],
               ].map(([id, label, ph, span]) => (
                 <div key={id} className="field" style={{ gridColumn: span || 'auto' }}>
                   <label style={{ fontFamily:'var(--font-mono)', color:'var(--cielo)', fontSize:11 }}>{label}</label>
@@ -570,7 +570,7 @@ const VariantColorStandalone = () => {
                 </div>
               ))}
               <button type="submit" style={{ gridColumn:'span 2', padding:20, background:'linear-gradient(90deg, #8FC4F3 0%, #4A87FF 100%)', color:'var(--marino-deep)', fontFamily:'var(--font-mono)', fontWeight:800, letterSpacing:'0.08em', fontSize:14, border:'none', cursor:'pointer', borderRadius:0, boxShadow:'0 12px 32px -8px rgba(143,196,243,0.4)' }}>
-                ENVIAR_SOLICITUD →
+                ENVIAR SOLICITUD →
               </button>
             </form>
           </div>

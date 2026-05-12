@@ -1,20 +1,18 @@
-// ============================================================
 // RODARDOS Solar — Apps Script Web App
-// 1. Abre el Sheet "RODARDOS Solar — Cotizaciones" en Drive
-// 2. Extensiones > Apps Script
-// 3. Reemplaza todo el código con este
-// 4. Guardar > Implementar > Nueva implementación
-//    - Tipo: App web
-//    - Ejecutar como: Yo
-//    - Acceso: Cualquier usuario
-// ============================================================
 
-const SHEET_NAME = 'Sheet1';
+function doGet(e) {
+  // Función de prueba: visita la URL en el navegador para verificar que funciona
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+  sheet.appendRow([
+    new Date().toLocaleString('es-MX'),
+    'PRUEBA', 'PRUEBA', 'PRUEBA', '', '', '', '', ''
+  ]);
+  return ContentService.createTextOutput('OK - fila de prueba guardada').setMimeType(ContentService.MimeType.TEXT);
+}
 
 function doPost(e) {
   try {
     const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
-
     sheet.appendRow([
       new Date().toLocaleString('es-MX'),
       e.parameter.proyecto || '',
@@ -26,14 +24,8 @@ function doPost(e) {
       e.parameter.fecha    || '',
       e.parameter.email    || '',
     ]);
-
-    return ContentService
-      .createTextOutput('ok')
-      .setMimeType(ContentService.MimeType.TEXT);
-
+    return ContentService.createTextOutput('ok').setMimeType(ContentService.MimeType.TEXT);
   } catch (err) {
-    return ContentService
-      .createTextOutput('error: ' + err.message)
-      .setMimeType(ContentService.MimeType.TEXT);
+    return ContentService.createTextOutput('error: ' + err.message).setMimeType(ContentService.MimeType.TEXT);
   }
 }

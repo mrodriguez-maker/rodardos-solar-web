@@ -522,16 +522,19 @@ const VariantColorStandalone = () => {
 
                 // 1. WhatsApp
                 const msg = [
-                  '🌞 *SOLICITUD DE COTIZACIÓN — RODARDOS Solar*',
+                  'Buen día, me comunico a través del sitio web de RODARDOS Solar para solicitar una cotización.',
                   '',
-                  `📋 *Proyecto:* ${d.proyecto || '—'}`,
-                  `🏢 *Empresa:* ${d.empresa || '—'}`,
-                  `👤 *Rol:* ${d.rol || '—'}`,
-                  `⚡ *Capacidad:* ${d.mw || '—'} MW`,
-                  `🔢 *Módulos:* ${d.mod || '—'}`,
-                  `📍 *Estado:* ${d.estado || '—'}`,
-                  `📅 *Fecha objetivo:* ${d.fecha || '—'}`,
-                  `📧 *Email:* ${d.email || '—'}`,
+                  '*Datos del proyecto:*',
+                  `Proyecto: ${d.proyecto || '—'}`,
+                  `Empresa: ${d.empresa || '—'}`,
+                  `Rol: ${d.rol || '—'}`,
+                  `Capacidad: ${d.mw || '—'} MW`,
+                  `Módulos: ${d.mod || '—'}`,
+                  `Estado: ${d.estado || '—'}`,
+                  `Fecha objetivo: ${d.fecha || '—'}`,
+                  `Correo de contacto: ${d.email || '—'}`,
+                  '',
+                  'Quedo en espera de su propuesta. Gracias.',
                 ].join('\n');
                 window.open('https://wa.me/526221690609?text=' + encodeURIComponent(msg), '_blank');
 

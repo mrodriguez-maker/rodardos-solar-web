@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RODARDOS Solar — Perfil Empresarial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+<style>
+/* ============ TOKENS ============ */
+:root {
+  --marino:      #14247E;
+  --marino-deep: #0C1654;
+  --marino-mid:  #1D3099;
+  --cielo:       #8FC4F3;
+  --cielo-soft:  #C9E1F8;
+  --ink:         #0E1530;
+  --ink-soft:    #4A536B;
+  --paper:       #F6F7F9;
+  --white:       #FFFFFF;
+  --border:      #E2E6EF;
+  --solar:       #F5B800;
+  --font-sans:   'Inter', system-ui, sans-serif;
+  --font-mono:   'JetBrains Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { font-family: var(--font-sans); color: var(--ink); -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+
+/* ============ PAGE LAYOUT ============ */
+body {
+  background: #E8EAED;
+  padding: 32px;
+}
+
+.page {
+  width: 210mm;
+  background: var(--white);
+  margin: 0 auto 32px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+}
+
+@media screen {
+  .page { min-height: 297mm; }
+}
+
+.page + .page {
+  page-break-before: always;
+  break-before: page;
+}
+
+/* ============ HEADER ============ */
+.page-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-logo-strip {
+  background: var(--white);
+  padding: 28px 48px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-logo-strip img.logo-wordmark {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
+.header-logo-strip .doc-meta {
+  text-align: right;
+}
+
+.header-logo-strip .doc-meta-label {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  margin-bottom: 2px;
+}
+
+.header-logo-strip .doc-meta-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--marino);
+  letter-spacing: 0.02em;
+}
+
+.header-logo-strip .doc-meta-date {
+  font-size: 10px;
+  color: var(--ink-soft);
+  margin-top: 2px;
+  font-family: var(--font-mono);
+}
+
+.header-marino-strip {
+  background: var(--marino);
+  padding: 18px 48px;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.header-tagline {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cielo);
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+.header-division {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.header-division span {
+  color: var(--cielo);
+  font-weight: 300;
+}
+
+.header-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+}
+
+/* ============ ACCENT BAR ============ */
+.accent-bar {
+  height: 4px;
+  background: linear-gradient(90deg, var(--cielo) 0%, var(--marino-mid) 60%, transparent 100%);
+}
+
+/* ============ BODY ============ */
+.page-body {
+  flex: 1;
+  padding: 40px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* ============ SECTION ============ */
+.section {}
+
+.section-label {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--marino);
+  font-family: var(--font-mono);
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--marino);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-label::before {
+  content: '';
+  display: block;
+  width: 16px;
+  height: 2px;
+  background: var(--cielo);
+}
+
+/* ============ ABOUT ============ */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.about-text {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
+.about-text strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.about-meta {
+  background: var(--paper);
+  border-left: 3px solid var(--marino);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.meta-item {}
+
+.meta-key {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  margin-bottom: 2px;
+}
+
+.meta-val {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ============ SERVICES ============ */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.service-card {
+  border: 1px solid var(--border);
+  padding: 20px 20px;
+  position: relative;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--marino);
+}
+
+.service-num {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--marino);
+  font-family: var(--font-mono);
+  margin-bottom: 8px;
+}
+
+.service-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.service-desc {
+  font-size: 11px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+/* ============ PROYECTO ============ */
+.project-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.project-main {
+  background: var(--marino);
+  color: var(--white);
+  padding: 22px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-main::after {
+  content: 'CARACOLÍ';
+  position: absolute;
+  bottom: -10px;
+  right: -4px;
+  font-size: 52px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: rgba(255,255,255,0.05);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.project-client {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cielo);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.project-name {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.project-loc {
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 16px;
+}
+
+.project-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pstat {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 6px;
+}
+
+.pstat:last-child { border-bottom: none; padding-bottom: 0; }
+
+.pstat-label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  font-family: var(--font-mono);
+}
+
+.pstat-val {
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: var(--white);
+}
+
+.pstat-val.accent { color: var(--cielo); }
+
+.project-side {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.scope-card {
+  border: 1px solid var(--border);
+  padding: 14px 16px;
+}
+
+.scope-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  margin-bottom: 6px;
+}
+
+.scope-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.scope-items li {
+  font-size: 11px;
+  color: var(--ink);
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  line-height: 1.4;
+}
+
+.scope-items li::before {
+  content: '→';
+  color: var(--marino);
+  font-size: 10px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-family: var(--font-mono);
+}
+
+.delivery-card {
+  background: var(--paper);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.delivery-label {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+.delivery-val {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--marino);
+  letter-spacing: -0.02em;
+  font-family: var(--font-mono);
+}
+
+.delivery-sub {
+  font-size: 11px;
+  color: var(--ink-soft);
+}
+
+/* ============ DIFERENCIADORES ============ */
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.diff-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+  background: var(--paper);
+  border-left: 3px solid var(--cielo);
+}
+
+.diff-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.diff-desc {
+  font-size: 11px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+/* ============ CAPACIDADES ============ */
+.cap-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.cap-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+}
+
+.cap-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--marino);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cap-icon svg { display: block; }
+
+.cap-content {}
+
+.cap-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+
+.cap-desc {
+  font-size: 11px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+/* ============ CONTACT ============ */
+.contact-bar {
+  background: var(--ink);
+  margin: 0 -48px -40px;
+  padding: 24px 48px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 32px;
+}
+
+.contact-left {}
+
+.contact-headline {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+
+.contact-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+}
+
+.contact-items {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: right;
+}
+
+.contact-item-label {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  font-family: var(--font-mono);
+}
+
+.contact-item-val {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.contact-item-val.highlight {
+  color: var(--cielo);
+}
+
+/* ============ PAGE FOOTER ============ */
+.page-footer {
+  padding: 10px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+}
+
+.footer-brand {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--marino);
+  text-transform: uppercase;
+}
+
+.footer-note {
+  font-size: 9px;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+}
+
+/* ============ KPI ROW ============ */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+}
+
+.kpi-cell {
+  padding: 16px 18px;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.kpi-cell:last-child { border-right: none; }
+
+.kpi-label {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 600;
+  font-family: var(--font-mono);
+}
+
+.kpi-val {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--marino);
+  letter-spacing: -0.02em;
+  font-family: var(--font-mono);
+  line-height: 1;
+}
+
+.kpi-unit {
+  font-size: 10px;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+}
+
+/* ============ PRINT ============ */
+@media print {
+  html, body { background: none; padding: 0; margin: 0; }
+  .page {
+    margin: 0;
+    width: 210mm;
+    height: 297mm;
+    overflow: hidden;
+    box-shadow: none;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+  .page + .page {
+    page-break-before: always;
+    break-before: page;
+  }
+}
+
+@page {
+  size: A4;
+  margin: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== PAGE 1 ===================== -->
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div class="header-logo-strip">
+      <img class="logo-wordmark" src="assets/logo-rodardos-marino.png" alt="RODARDOS"/>
+      <div class="doc-meta">
+        <div class="doc-meta-label">Documento</div>
+        <div class="doc-meta-title">CV Empresarial</div>
+        <div class="doc-meta-date">Mayo 2026 · Confidencial</div>
+      </div>
+    </div>
+    <div class="header-marino-strip">
+      <div style="display:flex; align-items:baseline; gap:14px;">
+        <div class="header-division">División <span>Solar</span></div>
+        <div class="header-sub">O&amp;M · Parques Solares a Gran Escala</div>
+      </div>
+      <div class="header-tagline">Perfil Empresarial · 2026</div>
+    </div>
+  </div>
+  <div class="accent-bar"></div>
+
+  <!-- BODY -->
+  <div class="page-body">
+
+    <!-- QUIÉNES SOMOS -->
+    <div class="section">
+      <div class="section-label">Quiénes Somos</div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p><strong>RODARDOS Solar</strong> es la división especializada en operación y mantenimiento (O&amp;M) de parques fotovoltaicos de RODARDOS, empresa de construcción e infraestructura con base en <strong>Guaymas, Sonora</strong>.</p>
+          <br/>
+          <p>Ofrecemos servicios integrales de mantenimiento para parques fotovoltaicos a gran escala: <strong>limpieza de módulos</strong> (seca o húmeda, con cepillos y robots automatizados) y <strong>control de vegetación y deshierbe</strong> con tractores propios equipados con aditamentos especializados — todo con <strong>equipo y maquinaria propios</strong>, sin subcontratación, bajo un <strong>SLA contractual</strong> con reporte semanal al asset manager.</p>
+          <br/>
+          <p>Nuestra proximidad regional a los principales parques solares del noroeste de México nos permite tiempos de respuesta competitivos y un conocimiento profundo de las condiciones climáticas y de terreno de Sonora.</p>
+        </div>
+        <div class="about-meta">
+          <div class="meta-item">
+            <div class="meta-key">Razón Social</div>
+            <div class="meta-val">RODARDOS Solar</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-key">División de</div>
+            <div class="meta-val">RODARDOS Construcción</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-key">Base de Operaciones</div>
+            <div class="meta-val">Guaymas, Sonora · MX</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-key">Especialidad</div>
+            <div class="meta-val">O&amp;M Parques Fotovoltaicos</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-key">Cobertura</div>
+            <div class="meta-val">Noroeste de México</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-key">Contacto</div>
+            <div class="meta-val">mrodriguez@rodardos.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="section">
+      <div class="section-label">Capacidad Demostrada · Operación en Tastiota</div>
+      <div class="kpi-row">
+        <div class="kpi-cell">
+          <div class="kpi-label">Módulos</div>
+          <div class="kpi-val">288K</div>
+          <div class="kpi-unit">unidades fotovoltaicas</div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-label">Superficie Útil</div>
+          <div class="kpi-val">215</div>
+          <div class="kpi-unit">hectáreas operadas</div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-label">Potencia</div>
+          <div class="kpi-val">640W</div>
+          <div class="kpi-unit">por módulo bifacial</div>
+        </div>
+        <div class="kpi-cell">
+          <div class="kpi-label">Plazo</div>
+          <div class="kpi-val">4 sem</div>
+          <div class="kpi-unit">limpieza one-time</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVICIOS -->
+    <div class="section">
+      <div class="section-label">Servicios</div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-num">SVC — 01</div>
+          <div class="service-title">Limpieza de Módulos Fotovoltaicos</div>
+          <div class="service-desc">Proceso validado sin invalidar la garantía Canadian Solar. Nos adaptamos a <strong>limpieza en seco o en húmedo</strong> según las necesidades del parque y la disponibilidad de agua del sitio. Operamos con <strong>equipos de cepillos y robots de limpieza automatizada</strong> para cubrir grandes superficies con velocidad y consistencia. Limpieza one-time o contratos de mantenimiento periódico.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-num">SVC — 02</div>
+          <div class="service-title">Control de Vegetación y Deshierbe</div>
+          <div class="service-desc">Contamos con <strong>tractores con aditamentos especializados de deshierbe</strong>, lo que nos permite cubrir grandes superficies en menos tiempo y <strong>cumplir con plazos exigentes</strong>. Operación bajo estructuras y en caminos internos, con maquinaria propia adaptada al terreno desértico sonorense.</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-body -->
+
+  <div class="page-footer">
+    <div class="footer-brand">RODARDOS Solar</div>
+    <div class="footer-note">Perfil Empresarial · Pág. 1 de 2 · Confidencial</div>
+  </div>
+</div><!-- /page 1 -->
+
+
+<!-- ===================== PAGE 2 ===================== -->
+<div class="page">
+
+  <div class="page-header">
+    <div class="header-logo-strip" style="padding: 20px 48px 18px;">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <img class="logo-wordmark" src="assets/logo-rodardos-marino.png" alt="RODARDOS" style="height:26px;"/>
+        <span style="font-size:12px; font-weight:600; color:var(--marino); letter-spacing:0.16em; text-transform:uppercase; padding-left:14px; border-left:1px solid var(--border);">División Solar</span>
+      </div>
+      <div style="font-size:10px; color:var(--ink-soft); font-family:var(--font-mono); letter-spacing:0.04em;">Perfil Empresarial · 2026 · mrodriguez@rodardos.com</div>
+    </div>
+  </div>
+  <div class="accent-bar"></div>
+
+  <div class="page-body">
+
+    <!-- PROYECTO REFERENCIA -->
+    <div class="section">
+      <div class="section-label">Proyecto de Referencia</div>
+      <div class="project-grid">
+        <div class="project-main">
+          <div class="project-client">Cliente · Reverau / Revergy Group</div>
+          <div class="project-name">Parque Solar Caracolí</div>
+          <div class="project-loc">Tastiota, Sonora · México</div>
+          <div class="project-stats">
+            <div class="pstat">
+              <span class="pstat-label">Módulos</span>
+              <span class="pstat-val accent">288,580 uds.</span>
+            </div>
+            <div class="pstat">
+              <span class="pstat-label">Tecnología</span>
+              <span class="pstat-val">BiHiKu7 · CS7N-MB-AG</span>
+            </div>
+            <div class="pstat">
+              <span class="pstat-label">Fabricante</span>
+              <span class="pstat-val">Canadian Solar</span>
+            </div>
+            <div class="pstat">
+              <span class="pstat-label">Potencia módulo</span>
+              <span class="pstat-val">640–665W bifacial mono PERC</span>
+            </div>
+            <div class="pstat">
+              <span class="pstat-label">Estructura</span>
+              <span class="pstat-val">Tracker single-axis</span>
+            </div>
+            <div class="pstat">
+              <span class="pstat-label">Superficie útil</span>
+              <span class="pstat-val accent">215 ha / 646,750 m²</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-side">
+          <div class="scope-card">
+            <div class="scope-title">Alcance RODARDOS Solar</div>
+            <ul class="scope-items">
+              <li>Limpieza one-time de 288,580 módulos bifaciales</li>
+              <li>Deshierbe y control de vegetación en 215 ha</li>
+              <li>Mantenimiento de caminos internos de acceso</li>
+              <li>Protocolo validado con Canadian Solar (sin invalidar garantía)</li>
+            </ul>
+          </div>
+          <div class="delivery-card">
+            <div class="delivery-label">Plazo de Ejecución</div>
+            <div class="delivery-val">4 sem</div>
+            <div class="delivery-sub">Limpieza one-time + deshierbe completo con equipo propio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DIFERENCIADORES -->
+    <div class="section">
+      <div class="section-label">Diferenciadores</div>
+      <div class="diff-grid">
+        <div class="diff-item">
+          <div class="diff-title">Equipo y Maquinaria Propios</div>
+          <div class="diff-desc">Cero subcontratación. Operamos con personal directo y maquinaria propia, lo que garantiza control de calidad total y disponibilidad inmediata.</div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-title">Base Regional Sonora</div>
+          <div class="diff-desc">Sede en Guaymas, Sonora. Conocimiento del terreno desértico, normativa local y condiciones climáticas. Tiempos de respuesta más rápidos que competidores nacionales.</div>
+        </div>
+        <div class="diff-item">
+          <div class="diff-title">SLA por Contrato</div>
+          <div class="diff-desc">Acuerdos de nivel de servicio formalizados. Reporte semanal al asset manager con métricas de avance, incidencias y evidencia fotográfica.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAPACIDADES TÉCNICAS -->
+    <div class="section">
+      <div class="section-label">Capacidades Técnicas</div>
+      <div class="cap-grid">
+        <div class="cap-item">
+          <div class="cap-icon">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+              <path d="M12 3L4 7v5c0 5 3.8 9.7 8 11 4.2-1.3 8-6 8-11V7l-8-4z" stroke="#8FC4F3" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="cap-content">
+            <div class="cap-title">Protocolo Certificado Canadian Solar</div>
+            <div class="cap-desc">Procedimiento de limpieza sin fricción abrasiva que preserva la garantía del fabricante sobre módulos BiHiKu7.</div>
+          </div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-icon">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+              <rect x="3" y="9" width="18" height="10" rx="1.5" stroke="#8FC4F3" stroke-width="1.8"/>
+              <path d="M7 9V6a2 2 0 012-2h6a2 2 0 012 2v3" stroke="#8FC4F3" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="8" cy="15" r="1.2" fill="#8FC4F3"/>
+              <circle cx="16" cy="15" r="1.2" fill="#8FC4F3"/>
+            </svg>
+          </div>
+          <div class="cap-content">
+            <div class="cap-title">Robots y Cepillos de Limpieza</div>
+            <div class="cap-desc">Equipos de cepillos y robots automatizados que permiten limpieza en seco o en húmedo, adaptados a la disponibilidad de agua y al diseño del parque.</div>
+          </div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-icon">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+              <path d="M3 17h13l2-4h2v4" stroke="#8FC4F3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="7" cy="18.5" r="2.2" stroke="#8FC4F3" stroke-width="1.8"/>
+              <circle cx="17" cy="18.5" r="1.8" stroke="#8FC4F3" stroke-width="1.8"/>
+              <path d="M6 13V8h6v5" stroke="#8FC4F3" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="cap-content">
+            <div class="cap-title">Tractores con Aditamentos de Deshierbe</div>
+            <div class="cap-desc">Flota de tractores propios con implementos especializados para deshierbe a gran escala. Permite cumplir plazos exigentes en parques de más de 200 ha.</div>
+          </div>
+        </div>
+        <div class="cap-item">
+          <div class="cap-icon">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
+              <path d="M9 17H5a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3" stroke="#8FC4F3" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M12 17l2 2 4-4" stroke="#8FC4F3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="cap-content">
+            <div class="cap-title">Reportes Semanales al Asset Manager</div>
+            <div class="cap-desc">Dashboard de avance, registro fotográfico georreferenciado e informe de incidencias con tiempo de respuesta documentado.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACTO -->
+    <div class="contact-bar">
+      <div class="contact-left">
+        <div class="contact-headline">¿Tiene un parque solar en el noroeste de México?</div>
+        <div class="contact-sub">Compártanos los detalles del parque — respuesta en menos de 24 horas con propuesta técnica a la medida.</div>
+      </div>
+      <div class="contact-items">
+        <div class="contact-item">
+          <div class="contact-item-label">Email</div>
+          <div class="contact-item-val highlight">mrodriguez@rodardos.com</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-item-label">Base</div>
+          <div class="contact-item-val">Guaymas, Sonora</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-body -->
+
+  <div class="page-footer">
+    <div class="footer-brand">RODARDOS Solar</div>
+    <div class="footer-note">Perfil Empresarial · Pág. 2 de 2 · Confidencial · Mayo 2026</div>
+  </div>
+</div><!-- /page 2 -->
+
+</body>
+</html>

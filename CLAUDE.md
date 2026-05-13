@@ -22,13 +22,14 @@ Asset managers, EPCs y O&M managers de parques solares. Tono: institucional, té
 - Potencia: 640–665W bifaciales mono PERC
 - Superficie: **215 ha útiles** / 646,750 m²
 - Estructura: Tracker single-axis
-- Plazo: 6 semanas (limpieza one-time + deshierbe)
+- Plazo: 4 semanas (limpieza one-time + deshierbe)
 - Alcance RODARDOS: limpieza, vegetación, caminos
 
-## Servicios (3 pilares, en `shared.jsx` → `SERVICES`)
-1. Limpieza de paneles (sin invalidar garantía Canadian Solar)
-2. Control de vegetación / deshierbe
-3. Drones & inspección termográfica
+## Servicios (2 pilares, en `shared.jsx` → `SERVICES`)
+1. **Limpieza de paneles** — sin invalidar garantía Canadian Solar. Adaptable a seco o húmedo. Operamos con equipos de cepillos y robots de limpieza automatizada.
+2. **Control de vegetación / deshierbe** — contamos con tractores propios equipados con aditamentos especializados de deshierbe, lo que permite cubrir grandes superficies y cumplir plazos exigentes.
+
+> **Nota:** RODARDOS Solar **no ofrece** inspección termográfica con drones (servicio retirado en commit `b9922dc`). Pueden usarse drones para tomas aéreas de marketing, pero no como servicio comercial. Iconos `IconDrone` y datos legados en `shared.jsx` se mantienen por compatibilidad histórica.
 
 ## Diferenciadores (en `shared.jsx` → `DIFERENCIADORES`)
 - Equipo y maquinaria propios (0 subcontratos)
@@ -71,7 +72,7 @@ Persistencia via `__edit_mode_set_keys` + bloque `EDITMODE-BEGIN`/`EDITMODE-END`
 
 ## Próximos pasos sugeridos
 - Confirmar variante final (sugerido: F)
-- Sustituir fotos Unsplash por reales (drones del parque, equipo, robots de limpieza)
+- Sustituir fotos Unsplash por reales (tomas aéreas del parque, equipo, robots y tractores)
 - Añadir: página Servicios (deep dive cada pilar), Proyectos, Nosotros, Contacto
 - Versión mobile responsive
 - Sumar testimoniales/firmas de cliente Reverau cuando sea posible

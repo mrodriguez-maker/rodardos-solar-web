@@ -8,6 +8,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="assets/iso-rodardos-marino.png"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://solar.rodardos.com/"/>
+<meta property="og:title" content="RODARDOS Solar — Mantenimiento O&amp;M de parques solares"/>
+<meta property="og:description" content="Limpieza de paneles y control de vegetación para parques solares a gran escala. Base Guaymas, Sonora. Equipo propio, SLA por contrato."/>
+<meta property="og:image" content="https://solar.rodardos.com/assets/desh-06-tracker.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
 
 <style>
 /* ============ TOKENS ============ */
@@ -204,13 +211,16 @@ section[id] { scroll-margin-top: 80px; }
 
 /* ===== MOBILE (≤768px) ===== */
 @media (max-width: 768px) {
+  :root { --d-section: 64px; }
   .container { padding: 0 20px !important; }
 
   .nav-desktop { display: none; }
   .hamburger { display: flex; }
 
+  #hero { padding-top: 100px !important; padding-bottom: 64px !important; }
   .hero-grid { gap: 32px; }
-  .kpi-grid { grid-template-columns: repeat(2, 1fr); margin-top: 48px; }
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); margin-top: 40px; }
+  .kpi-grid > div { padding: 16px !important; }
 
   .services-grid { grid-template-columns: 1fr; }
 
@@ -218,8 +228,13 @@ section[id] { scroll-margin-top: 80px; }
   .tastiota-main-grid { grid-template-columns: 1fr; }
   .tastiota-left-panel { border-right: none !important; border-bottom: 1px solid rgba(143,196,243,0.2) !important; padding: 24px !important; }
   .tastiota-data-grid { grid-template-columns: 1fr 1fr; }
+  .tastiota-data-grid > div { padding: 16px 20px !important; }
+
+  .gallery-strip { height: 160px !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch; flex-wrap: nowrap !important; }
+  .gallery-strip > div { flex: 0 0 200px !important; }
 
   .diff-grid { grid-template-columns: 1fr; }
+  .diff-grid > div { padding: 24px !important; min-height: auto !important; }
 
   .form-layout { grid-template-columns: 1fr !important; gap: 40px; }
   .form-fields { grid-template-columns: 1fr !important; padding: 24px !important; }
@@ -418,6 +433,118 @@ const Header = () => {
 };
 
 /* ─────────────────────────────────────────
+   CONTACT SECTION
+───────────────────────────────────────── */
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw-6f6AJRfbFe4ky6YoxhfRIC1fvgdh_B59XZhxlz1gMwqC_nfrfZdnE79Wrbg4v_erpQ/exec';
+
+const ContactSection = () => {
+  const [sent, setSent] = React.useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const d = Object.fromEntries(fd.entries());
+
+    const msg = [
+      'Buen día, me comunico a través del sitio web de RODARDOS Solar para solicitar una cotización.',
+      '', '*Datos del proyecto:*',
+      `Proyecto: ${d.proyecto||'—'}`, `Empresa: ${d.empresa||'—'}`, `Rol: ${d.rol||'—'}`,
+      `Capacidad: ${d.mw||'—'} MW`, `Módulos: ${d.mod||'—'}`, `Estado: ${d.estado||'—'}`,
+      `Fecha objetivo: ${d.fecha||'—'}`, `Correo de contacto: ${d.email||'—'}`,
+      '', 'Quedo en espera de su propuesta. Gracias.',
+    ].join('\n');
+    window.open('https://wa.me/526221690609?text=' + encodeURIComponent(msg), '_blank');
+
+    const iframe = document.createElement('iframe');
+    iframe.name = 'gs_iframe'; iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+    const gForm = document.createElement('form');
+    gForm.method = 'POST'; gForm.action = APPS_SCRIPT_URL; gForm.target = 'gs_iframe';
+    Object.entries(d).forEach(([k,v]) => {
+      const inp = document.createElement('input');
+      inp.type = 'hidden'; inp.name = k; inp.value = v;
+      gForm.appendChild(inp);
+    });
+    document.body.appendChild(gForm);
+    gForm.submit();
+    setTimeout(() => { document.body.removeChild(gForm); document.body.removeChild(iframe); }, 4000);
+
+    setSent(true);
+  };
+
+  return (
+    <section id="cotizacion" style={{ padding:'var(--d-section) 0', background:'linear-gradient(180deg, #0A1454 0%, #050A2E 100%)', color:'#fff', position:'relative', overflow:'hidden' }}>
+      <div style={{ position:'absolute', top:'10%', right:'-15%', width:700, height:700, background:'radial-gradient(circle, rgba(143,196,243,0.2) 0%, transparent 65%)', pointerEvents:'none' }}/>
+      <div className="container" style={{ position:'relative' }}>
+        <div style={{ fontSize:12, fontFamily:'var(--font-mono)', color:'var(--cielo)', letterSpacing:'0.12em', marginBottom:16 }}>// SOLICITAR_COTIZACIÓN.form</div>
+        <h2 style={{ fontSize:'clamp(36px,4vw,60px)', lineHeight:0.95, fontWeight:800, letterSpacing:'-0.03em', marginBottom:40 }}>
+          Cotiza<br/>
+          <span style={{ backgroundImage:'linear-gradient(90deg, #8FC4F3, #4A87FF)', WebkitBackgroundClip:'text', backgroundClip:'text', color:'transparent' }}>tu parque.</span>
+        </h2>
+
+        {sent ? (
+          <div style={{ display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', padding:'80px 40px', background:'linear-gradient(135deg, rgba(63,224,122,0.1), rgba(143,196,243,0.04))', border:'1px solid rgba(63,224,122,0.35)', borderTop:'3px solid #3FE07A' }}>
+            <div style={{ width:72, height:72, borderRadius:'50%', background:'rgba(63,224,122,0.15)', border:'2px solid #3FE07A', display:'flex', alignItems:'center', justifyContent:'center', marginBottom:24 }}>
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#3FE07A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6 17 L13 24 L26 10"/>
+              </svg>
+            </div>
+            <h3 style={{ fontSize:'clamp(22px,3vw,32px)', fontWeight:700, marginBottom:12 }}>Solicitud enviada</h3>
+            <p style={{ fontSize:17, opacity:0.82, lineHeight:1.65, marginBottom:12, maxWidth:460 }}>
+              Te contactamos en menos de 48 horas con propuesta técnica a la medida de tu parque.
+            </p>
+            <p style={{ fontSize:12, fontFamily:'var(--font-mono)', color:'var(--cielo)', letterSpacing:'0.1em', marginBottom:36 }}>
+              WHATSAPP ABIERTO · CONFIRMACIÓN INMEDIATA
+            </p>
+            <button onClick={() => setSent(false)} style={{ padding:'14px 32px', background:'none', border:'1px solid rgba(143,196,243,0.4)', color:'#fff', fontFamily:'var(--font-mono)', fontSize:12, letterSpacing:'0.1em', cursor:'pointer', borderRadius:2, transition:'border-color .15s' }}>
+              NUEVA SOLICITUD
+            </button>
+          </div>
+        ) : (
+          <div className="form-layout">
+            <div>
+              <p style={{ fontSize:17, lineHeight:1.6, opacity:0.85, marginBottom:32 }}>
+                Respondemos en menos de 48 horas con propuesta técnico-económica:
+                alcance, plazo, equipo asignado, SLA y reporte semanal.
+              </p>
+              <div style={{ padding:24, background:'linear-gradient(135deg, rgba(143,196,243,0.12), rgba(143,196,243,0.02))', border:'1px solid rgba(143,196,243,0.3)', borderTop:'3px solid var(--cielo)' }}>
+                <div style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'var(--cielo)', letterSpacing:'0.1em', marginBottom:12 }}>CONTACTO.directo</div>
+                <div style={{ fontSize:18, fontWeight:600 }}>mrodriguez@rodardos.com</div>
+                <div style={{ fontSize:14, opacity:0.8, marginTop:4 }}>+52 622 169 0609 · Guaymas, Sonora</div>
+              </div>
+            </div>
+            <form
+              className="form-fields"
+              style={{ background:'linear-gradient(135deg, rgba(143,196,243,0.08), rgba(74,135,255,0.04))', border:'1px solid rgba(143,196,243,0.25)', padding:40, backdropFilter:'blur(8px)', alignContent:'start' }}
+              onSubmit={handleSubmit}
+            >
+              {[
+                ['proyecto', 'NOMBRE DEL PROYECTO', 'Ej. Parque Solar Caracolí',  'span 2'],
+                ['empresa',  'EMPRESA',              'Nombre de tu empresa',       null    ],
+                ['rol',      'ROL',                  'Ej. Gerente de operaciones', null    ],
+                ['mw',       'CAPACIDAD (MW)',        'Ej. 180',                    null    ],
+                ['mod',      'NO. DE MÓDULOS',        'Ej. 288,580',               null    ],
+                ['estado',   'ESTADO',                'Ej. Sonora',                null    ],
+                ['fecha',    'FECHA OBJETIVO',        '',                           null    ],
+                ['email',    'CORREO ELECTRÓNICO',    'contacto@tuempresa.com',     'span 2'],
+              ].map(([id, label, ph, span]) => (
+                <div key={id} className="field" style={{ gridColumn: span || 'auto' }}>
+                  <label style={{ fontFamily:'var(--font-mono)', color:'var(--cielo)', fontSize:11 }}>{label}</label>
+                  <input id={id} name={id} placeholder={ph} type={id==='fecha'?'date':id==='email'?'email':'text'}/>
+                </div>
+              ))}
+              <button type="submit" style={{ gridColumn:'span 2', padding:20, background:'linear-gradient(90deg, #8FC4F3 0%, #4A87FF 100%)', color:'var(--marino-deep)', fontFamily:'var(--font-mono)', fontWeight:800, letterSpacing:'0.08em', fontSize:14, border:'none', cursor:'pointer', borderRadius:0, boxShadow:'0 12px 32px -8px rgba(143,196,243,0.4)' }}>
+                ENVIAR SOLICITUD →
+              </button>
+            </form>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
+
+/* ─────────────────────────────────────────
    PAGE
 ───────────────────────────────────────── */
 const Page = () => (
@@ -600,11 +727,11 @@ const Page = () => (
               </p>
               <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:8 }}>
                 <div style={{ position:'relative', aspectRatio:'4/3', overflow:'hidden' }}>
-                  <video src="assets/ANTES%20DESHIERBE.mp4" autoPlay muted loop playsInline preload="metadata" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+                  <video src="assets/ANTES%20DESHIERBE.mp4" autoPlay muted loop playsInline preload="none" poster="assets/desh-02-tall-grass.jpg" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
                   <div style={{ position:'absolute', top:8, left:8, padding:'3px 8px', background:'#FFD466', color:'var(--marino-deep)', fontFamily:'var(--font-mono)', fontSize:9, fontWeight:700, letterSpacing:'0.12em' }}>ANTES</div>
                 </div>
                 <div style={{ position:'relative', aspectRatio:'4/3', overflow:'hidden' }}>
-                  <video src="assets/DESPUES%20DESHIERBE.mp4" autoPlay muted loop playsInline preload="metadata" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+                  <video src="assets/DESPUES%20DESHIERBE.mp4" autoPlay muted loop playsInline preload="none" poster="assets/desh-01-row-clean.jpg" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
                   <div style={{ position:'absolute', top:8, left:8, padding:'3px 8px', background:'#3FE07A', color:'var(--marino-deep)', fontFamily:'var(--font-mono)', fontSize:9, fontWeight:700, letterSpacing:'0.12em' }}>DESPUÉS</div>
                 </div>
               </div>
@@ -634,7 +761,7 @@ const Page = () => (
 
     {/* ── GALERÍA ── */}
     <div style={{ background:'#071040', overflow:'hidden' }}>
-      <div style={{ display:'flex', gap:4, height:220 }}>
+      <div className="gallery-strip" style={{ display:'flex', gap:4, height:220 }}>
         {[
           { src:'assets/desh-08.jpg',    label:'TASTIOTA · 2026' },
           { src:'assets/desh20.jpeg',    label:'DESHIERBE_OPS'   },
@@ -684,103 +811,7 @@ const Page = () => (
       </div>
     </section>
 
-    {/* ── COTIZACIÓN ── */}
-    <section id="cotizacion" style={{ padding:'var(--d-section) 0', background:'linear-gradient(180deg, #0A1454 0%, #050A2E 100%)', color:'#fff', position:'relative', overflow:'hidden' }}>
-      <div style={{ position:'absolute', top:'10%', right:'-15%', width:700, height:700, background:'radial-gradient(circle, rgba(143,196,243,0.2) 0%, transparent 65%)', pointerEvents:'none' }}/>
-      <div className="container" style={{ position:'relative' }}>
-        <div className="form-layout">
-          <div>
-            <div style={{ fontSize:12, fontFamily:'var(--font-mono)', color:'var(--cielo)', letterSpacing:'0.12em', marginBottom:16 }}>// SOLICITAR_COTIZACIÓN.form</div>
-            <h2 style={{ fontSize:'clamp(36px,4vw,60px)', lineHeight:0.95, fontWeight:800, letterSpacing:'-0.03em', marginBottom:24 }}>
-              Cotiza<br/>
-              <span style={{ backgroundImage:'linear-gradient(90deg, #8FC4F3, #4A87FF)', WebkitBackgroundClip:'text', backgroundClip:'text', color:'transparent' }}>tu parque.</span>
-            </h2>
-            <p style={{ fontSize:17, lineHeight:1.6, opacity:0.85, marginBottom:32 }}>
-              Respondemos en menos de 48 horas con propuesta técnico-económica:
-              alcance, plazo, equipo asignado, SLA y reporte semanal.
-            </p>
-            <div style={{ padding:24, background:'linear-gradient(135deg, rgba(143,196,243,0.12), rgba(143,196,243,0.02))', border:'1px solid rgba(143,196,243,0.3)', borderTop:'3px solid var(--cielo)' }}>
-              <div style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'var(--cielo)', letterSpacing:'0.1em', marginBottom:12 }}>CONTACTO.directo</div>
-              <div style={{ fontSize:18, fontWeight:600 }}>mrodriguez@rodardos.com</div>
-              <div style={{ fontSize:14, opacity:0.8, marginTop:4 }}>+52 622 169 0609 · Guaymas, Sonora</div>
-            </div>
-          </div>
-          <form
-            className="form-fields"
-            style={{ background:'linear-gradient(135deg, rgba(143,196,243,0.08), rgba(74,135,255,0.04))', border:'1px solid rgba(143,196,243,0.25)', padding:40, backdropFilter:'blur(8px)', alignContent:'start' }}
-            onSubmit={(e) => {
-              e.preventDefault();
-              const fd = new FormData(e.target);
-              const d = Object.fromEntries(fd.entries());
-
-              const msg = [
-                'Buen día, me comunico a través del sitio web de RODARDOS Solar para solicitar una cotización.',
-                '',
-                '*Datos del proyecto:*',
-                `Proyecto: ${d.proyecto || '—'}`,
-                `Empresa: ${d.empresa || '—'}`,
-                `Rol: ${d.rol || '—'}`,
-                `Capacidad: ${d.mw || '—'} MW`,
-                `Módulos: ${d.mod || '—'}`,
-                `Estado: ${d.estado || '—'}`,
-                `Fecha objetivo: ${d.fecha || '—'}`,
-                `Correo de contacto: ${d.email || '—'}`,
-                '',
-                'Quedo en espera de su propuesta. Gracias.',
-              ].join('\n');
-              window.open('https://wa.me/526221690609?text=' + encodeURIComponent(msg), '_blank');
-
-              const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw-6f6AJRfbFe4ky6YoxhfRIC1fvgdh_B59XZhxlz1gMwqC_nfrfZdnE79Wrbg4v_erpQ/exec';
-              const iframe = document.createElement('iframe');
-              iframe.name = 'gs_iframe';
-              iframe.style.display = 'none';
-              document.body.appendChild(iframe);
-              const gForm = document.createElement('form');
-              gForm.method = 'POST';
-              gForm.action = APPS_SCRIPT_URL;
-              gForm.target = 'gs_iframe';
-              Object.entries(d).forEach(([k, v]) => {
-                const inp = document.createElement('input');
-                inp.type = 'hidden';
-                inp.name = k;
-                inp.value = v;
-                gForm.appendChild(inp);
-              });
-              document.body.appendChild(gForm);
-              gForm.submit();
-              setTimeout(() => {
-                document.body.removeChild(gForm);
-                document.body.removeChild(iframe);
-              }, 4000);
-
-              e.target.reset();
-            }}
-          >
-            {[
-              ['proyecto', 'NOMBRE DEL PROYECTO', 'Ej. Parque Solar Caracolí',  'span 2'],
-              ['empresa',  'EMPRESA',              'Nombre de tu empresa',       null    ],
-              ['rol',      'ROL',                  'Ej. Gerente de operaciones', null    ],
-              ['mw',       'CAPACIDAD (MW)',        'Ej. 180',                    null    ],
-              ['mod',      'NO. DE MÓDULOS',        'Ej. 288,580',               null    ],
-              ['estado',   'ESTADO',                'Ej. Sonora',                null    ],
-              ['fecha',    'FECHA OBJETIVO',        '',                           null    ],
-              ['email',    'CORREO ELECTRÓNICO',    'contacto@tuempresa.com',     'span 2'],
-            ].map(([id, label, ph, span]) => (
-              <div key={id} className="field" style={{ gridColumn: span || 'auto' }}>
-                <label style={{ fontFamily:'var(--font-mono)', color:'var(--cielo)', fontSize:11 }}>{label}</label>
-                <input
-                  id={id} name={id} placeholder={ph}
-                  type={id === 'fecha' ? 'date' : id === 'email' ? 'email' : 'text'}
-                />
-              </div>
-            ))}
-            <button type="submit" style={{ gridColumn:'span 2', padding:20, background:'linear-gradient(90deg, #8FC4F3 0%, #4A87FF 100%)', color:'var(--marino-deep)', fontFamily:'var(--font-mono)', fontWeight:800, letterSpacing:'0.08em', fontSize:14, border:'none', cursor:'pointer', borderRadius:0, boxShadow:'0 12px 32px -8px rgba(143,196,243,0.4)' }}>
-              ENVIAR SOLICITUD →
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
+    <ContactSection/>
 
     {/* ── FOOTER ── */}
     <footer style={{ background:'#050A2E', color:'#fff', padding:'48px 0', borderTop:'1px solid rgba(143,196,243,0.25)' }}>

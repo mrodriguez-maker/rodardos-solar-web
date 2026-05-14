@@ -162,6 +162,9 @@ section[id] { scroll-margin-top: 80px; }
   gap: 20px;
 }
 
+/* ===== LANG TOGGLE ===== */
+.lang-toggle-mobile { display: none; }
+
 /* ===== HAMBURGER ===== */
 .nav-desktop { display: flex; gap: 32px; align-items: center; }
 .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
@@ -216,6 +219,7 @@ section[id] { scroll-margin-top: 80px; }
 
   .nav-desktop { display: none; }
   .hamburger { display: flex; }
+  .lang-toggle-mobile { display: flex; }
 
   #hero { padding-top: 100px !important; padding-bottom: 64px !important; }
   .hero-grid { gap: 32px; }
@@ -272,7 +276,7 @@ section[id] { scroll-margin-top: 80px; }
 
 <script type="text/babel">
 /* ─────────────────────────────────────────
-   SHARED — Logo, icons, data
+   ICONS & WORDMARK
 ───────────────────────────────────────── */
 
 const RodardosIso = ({ size = 40, fill = '#14247E', arcFill = '#8FC4F3' }) => (

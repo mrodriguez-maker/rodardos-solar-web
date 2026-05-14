@@ -1,0 +1,10 @@
+# Local Claude Code settings
+.claude/
+
+# macOS / Windows artifacts
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/

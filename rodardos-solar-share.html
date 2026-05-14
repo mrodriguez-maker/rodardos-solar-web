@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RODARDOS Solar — Mantenimiento O&M de parques solares</title>
+<meta name="description" content="Limpieza de paneles, control de vegetación e inspección termográfica para parques solares a gran escala. Base Guaymas, Sonora. Equipo propio, SLA por contrato."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+
+<style>
+/* ============ TOKENS ============ */
+:root {
+  --marino: #14247E;
+  --marino-deep: #0C1654;
+  --marino-soft: #2A3E9E;
+  --cielo: #8FC4F3;
+  --cielo-soft: #C9E1F8;
+  --acero: #92A1A1;
+  --asfalto: #1F252E;
+  --gris: #B8BFC2;
+  --gris-soft: #E8EBED;
+  --bg: #FFFFFF;
+  --paper: #F6F7F9;
+  --ink: #0E1530;
+  --ink-soft: #4A536B;
+  --solar: #F5B800;
+  --verde: #1F9B5A;
+  --accent: var(--marino);
+  --accent-ink: #FFFFFF;
+  --d-section: 120px;
+  --d-block: 64px;
+  --d-tight: 24px;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { font-family: var(--font-sans); color: var(--ink); -webkit-font-smoothing: antialiased; }
+html { scroll-behavior: smooth; }
+img { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
+input, textarea, select { font: inherit; }
+
+body { background: #0A1454; }
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: transform .15s ease, background .15s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-1px); }
+
+.logo-mark { display: inline-flex; align-items: center; gap: 10px; }
+.logo-mark svg { display: block; }
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.field input, .field select, .field textarea {
+  padding: 14px 16px;
+  border: 1px solid rgba(143,196,243,0.3);
+  background: rgba(10,20,84,0.5);
+  color: #fff;
+  border-radius: 0;
+  outline: none;
+  transition: border-color .15s ease;
+}
+.field input:focus, .field textarea:focus, .field select:focus {
+  border-color: var(--cielo);
+}
+.field input::placeholder { color: rgba(255,255,255,0.35); }
+
+.tabular { font-variant-numeric: tabular-nums; }
+
+.page-root {
+  width: 100%;
+  min-height: 100vh;
+  background: #0A1454;
+  color: #fff;
+  font-feature-settings: "ss01", "cv11";
+}
+
+.header-standalone {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(143,196,243,0.15);
+  transition: background 0.2s ease;
+}
+
+section[id] { scroll-margin-top: 80px; }
+
+/* ===== RESPONSIVE GRIDS ===== */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  margin-top: 80px;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.tastiota-main-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+}
+.tastiota-data-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.form-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 80px;
+}
+.form-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* ===== HAMBURGER ===== */
+.nav-desktop { display: flex; gap: 32px; align-items: center; }
+.hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; }
+.hamburger span { display: block; width: 24px; height: 2px; background: #fff; transition: transform 0.2s, opacity 0.2s; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  padding: 16px 20px 24px;
+  border-top: 1px solid rgba(143,196,243,0.15);
+  gap: 4px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(143,196,243,0.1);
+  opacity: 0.85;
+}
+.mobile-menu a.cta {
+  margin-top: 12px;
+  padding: 14px 20px;
+  background: var(--cielo);
+  color: var(--marino-deep);
+  font-weight: 700;
+  text-align: center;
+  border-bottom: none;
+  opacity: 1;
+}
+
+/* ===== TABLET (≤1024px) ===== */
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  .photo-stack { display: none; }
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .tastiota-main-grid { grid-template-columns: 1fr; }
+  .tastiota-data-grid { border-top: 1px solid rgba(143,196,243,0.2); }
+  .form-layout { grid-template-columns: 1fr; gap: 48px; }
+  .diff-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ===== MOBILE (≤768px) ===== */
+@media (max-width: 768px) {
+  .container { padding: 0 20px !important; }
+
+  .nav-desktop { display: none; }
+  .hamburger { display: flex; }
+
+  .hero-grid { gap: 32px; }
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); margin-top: 48px; }
+
+  .services-grid { grid-template-columns: 1fr; }
+
+  .tastiota-section-header { flex-direction: column !important; align-items: flex-start !important; gap: 20px; }
+  .tastiota-main-grid { grid-template-columns: 1fr; }
+  .tastiota-left-panel { border-right: none !important; border-bottom: 1px solid rgba(143,196,243,0.2) !important; padding: 24px !important; }
+  .tastiota-data-grid { grid-template-columns: 1fr 1fr; }
+
+  .diff-grid { grid-template-columns: 1fr; }
+
+  .form-layout { grid-template-columns: 1fr !important; gap: 40px; }
+  .form-fields { grid-template-columns: 1fr !important; padding: 24px !important; }
+  .form-fields .field { grid-column: auto !important; }
+  .form-fields button[type="submit"] { grid-column: auto !important; }
+
+  .footer-inner { flex-direction: column !important; align-items: flex-start !important; gap: 16px; }
+  .footer-meta { flex-direction: column !important; gap: 8px !important; }
+
+  .header-inner { padding: 14px 20px !important; }
+  .division-badge { display: none; }
+}
+</style>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+/* ─────────────────────────────────────────
+   SHARED — Logo, icons, data
+───────────────────────────────────────── */
+
+const RodardosIso = ({ size = 40, fill = '#14247E', arcFill = '#8FC4F3' }) => (
+  <svg viewBox="0 0 120 90" width={size} height={size * 0.75} aria-hidden="true">
+    <path d="M62 8 L94 8 Q108 8 108 26 Q108 40 96 44 L108 82 L92 82 L82 48 L74 48 L74 82 L62 82 Z M74 22 L74 36 L92 36 Q96 36 96 29 Q96 22 92 22 Z"
+          fill={fill}/>
+    <path d="M8 56 Q40 36 78 50 Q102 58 110 70 L106 76 Q90 60 70 58 Q40 56 12 64 Z"
+          fill={arcFill} opacity="0.85"/>
+  </svg>
+);
+
+const RodardosWordmark = ({ color = '#14247E', arc = '#8FC4F3' }) => (
+  <span className="logo-mark" style={{ gap: 0 }}>
+    <RodardosIso size={36} fill={color} arcFill={arc}/>
+    <span style={{
+      fontFamily: 'Inter, sans-serif', fontWeight: 800, fontSize: 22,
+      letterSpacing: '0.02em', color: color, marginLeft: 10,
+    }}>RODARDOS<sup style={{
+      fontSize: 9, fontWeight: 700, letterSpacing: '0.1em',
+      marginLeft: 4, color: arc, verticalAlign: 'top',
+    }}>SOLAR</sup></span>
+  </span>
+);
+
+const Icon = {
+  Leaf: (p) => (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5" {...p}>
+      <path d="M6 26 C6 14 14 6 26 6 C26 18 18 26 6 26 Z"/>
+      <path d="M6 26 L18 14"/>
+    </svg>
+  ),
+  Panel: (p) => (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5" {...p}>
+      <path d="M4 24 L8 8 L28 8 L24 24 Z"/>
+      <path d="M11 8 L9 24 M18 8 L17 24 M25 8 L25 24 M6.5 16 L25.5 16"/>
+    </svg>
+  ),
+  Shield: (p) => (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5" {...p}>
+      <path d="M16 4 L26 8 V16 C26 22 22 26 16 28 C10 26 6 22 6 16 V8 Z"/>
+      <path d="M11 16 L15 20 L21 13"/>
+    </svg>
+  ),
+  Pin: (p) => (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5" {...p}>
+      <path d="M16 4 C10 4 6 8 6 14 C6 22 16 28 16 28 C16 28 26 22 26 14 C26 8 22 4 16 4 Z"/>
+      <circle cx="16" cy="14" r="3"/>
+    </svg>
+  ),
+  Clock: (p) => (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.5" {...p}>
+      <circle cx="16" cy="16" r="12"/><path d="M16 8 L16 16 L22 19"/>
+    </svg>
+  ),
+};
+
+const SERVICES = [
+  {
+    icon: Icon.Leaf,
+    title: 'Control de vegetación y caminos',
+    sub: 'Deshierbe especializado',
+    body: 'Deshierbe selectivo mecanizado y manual, control perimetral e interno, mantenimiento de terracerías y caminos. Eliminamos sombras parásitas y riesgo de incendio con equipo propio.',
+    tags: ['Deshierbe mecanizado', 'Control perimetral', 'Terracerías y caminos', 'Plan ambiental'],
+  },
+  {
+    icon: Icon.Panel,
+    title: 'Limpieza de paneles',
+    sub: 'Certificada por fabricante',
+    body: 'Limpieza con o sin agua según topografía y disponibilidad hídrica. Cumplimos especificaciones técnicas de Canadian Solar — no invalidamos garantías de módulo.',
+    tags: ['Cepillado certificado', 'Recuperación de PR', 'Sin invalidar garantía'],
+  },
+];
+
+const DIFERENCIADORES = [
+  {
+    icon: Icon.Shield,
+    title: 'Equipo propio',
+    body: 'Cuadrillas, supervisión y maquinaria de RODARDOS. No subcontratamos: tú firmas con nosotros, nosotros ejecutamos.',
+  },
+  {
+    icon: Icon.Pin,
+    title: 'Base Sonora · Cobertura nacional',
+    body: 'Operación logística desde Guaymas. Movilización inmediata al noroeste; despliegue a cualquier estado del país.',
+  },
+  {
+    icon: Icon.Clock,
+    title: 'SLA garantizado',
+    body: 'Compromisos de tiempo de respuesta y entrega por contrato. Reporte semanal de avance con KPIs de generación recuperada.',
+  },
+];
+
+/* Fotos Unsplash — funciona con internet */
+const P = {
+  rowClean:      'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1600&q=80&auto=format&fit=crop',
+  tallGrass:     'https://images.unsplash.com/photo-1545209463-e2825498edbf?w=1600&q=80&auto=format&fit=crop',
+  workerTrimmer: 'https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?w=1600&q=80&auto=format&fit=crop',
+  tracker:       'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=2000&q=80&auto=format&fit=crop',
+  panelAngle:    'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=1200&q=80&auto=format&fit=crop',
+  workerRow:     'https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=1600&q=80&auto=format&fit=crop',
+};
+
+/* ─────────────────────────────────────────
+   HEADER
+───────────────────────────────────────── */
+const NAV_LINKS = [
+  { label: 'Servicios',     href: '#servicios'      },
+  { label: 'Capacidades',   href: '#diferenciadores' },
+  { label: 'Caso Tastiota', href: '#tastiota'        },
+  { label: 'Cotización',    href: '#cotizacion'      },
+];
+
+const Header = () => {
+  const [scrolled, setScrolled] = React.useState(false);
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const closeMenu = () => setMenuOpen(false);
+
+  return (
+    <header className="header-standalone" style={{
+      background: scrolled ? 'rgba(10,20,84,0.97)' : 'rgba(10,20,84,0.80)',
+    }}>
+      <div className="header-inner" style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'18px 64px' }}>
+        <div style={{ display:'flex', alignItems:'center', gap:16 }}>
+          <a href="#top"><RodardosWordmark color="#fff" arc="#8FC4F3"/></a>
+          <span className="division-badge" style={{
+            fontSize:11, fontFamily:'var(--font-mono)', color:'var(--cielo)',
+            padding:'4px 10px', border:'1px solid rgba(143,196,243,0.4)', borderRadius:2,
+            letterSpacing:'0.1em', background:'rgba(143,196,243,0.08)',
+          }}>SOLAR · DIVISIÓN_</span>
+        </div>
+
+        <nav className="nav-desktop">
+          {NAV_LINKS.map(l => (
+            <a key={l.href} href={l.href} style={{
+              color:'#fff', fontSize:13, fontFamily:'var(--font-mono)',
+              opacity:0.85, letterSpacing:'0.04em', transition:'opacity 0.15s',
+            }}
+            onMouseEnter={e => e.target.style.opacity = 1}
+            onMouseLeave={e => e.target.style.opacity = 0.85}
+            >{l.label}</a>
+          ))}
+          <a href="#cotizacion" className="btn" style={{
+            background:'var(--cielo)', color:'var(--marino-deep)', padding:'11px 20px',
+            fontSize:13, fontFamily:'var(--font-mono)', letterSpacing:'0.06em',
+            borderRadius:2, fontWeight:700,
+          }}>SOLICITAR PROPUESTA →</a>
+        </nav>
+
+        <button
+          className={`hamburger ${menuOpen ? 'open' : ''}`}
+          onClick={() => setMenuOpen(o => !o)}
+          aria-label="Menú"
+        >
+          <span/><span/><span/>
+        </button>
+      </div>
+
+      <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
+        {NAV_LINKS.map(l => (
+          <a key={l.href} href={l.href} onClick={closeMenu}>{l.label}</a>
+        ))}
+        <a href="#cotizacion" className="cta" onClick={closeMenu}>SOLICITAR PROPUESTA →</a>
+      </div>
+    </header>
+  );
+};
+
+/* ─────────────────────────────────────────
+   PAGE
+───────────────────────────────────────── */
+const Page = () => (
+  <div style={{ width:'100%' }}>
+
+    {/* ── HERO ── */}
+    <section id="hero" style={{
+      position:'relative', minHeight:'100vh', color:'#fff',
+      background:'#0A1454', overflow:'hidden',
+      paddingTop:180, paddingBottom:120,
+    }}>
+      <div style={{ position:'absolute', top:'-200px', right:'-100px', width:800, height:800, background:'radial-gradient(circle, rgba(143,196,243,0.55) 0%, transparent 60%)', pointerEvents:'none' }}/>
+      <div style={{ position:'absolute', bottom:'-300px', left:'-200px', width:900, height:900, background:'radial-gradient(circle, rgba(74,135,255,0.4) 0%, transparent 65%)', pointerEvents:'none' }}/>
+      <div style={{ position:'absolute', top:'20%', left:'40%', width:500, height:500, background:'radial-gradient(circle, rgba(20,180,255,0.25) 0%, transparent 70%)', pointerEvents:'none' }}/>
+      <svg style={{ position:'absolute', inset:0, width:'100%', height:'100%', opacity:0.12 }} aria-hidden>
+        <defs>
+          <pattern id="gridS" width="56" height="56" patternUnits="userSpaceOnUse">
+            <path d="M 56 0 L 0 0 0 56" fill="none" stroke="#8FC4F3" strokeWidth="1"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#gridS)"/>
+      </svg>
+
+      <div className="container" style={{ position:'relative' }}>
+        <div className="hero-grid">
+          {/* Left — copy */}
+          <div>
+            <div style={{
+              display:'inline-flex', alignItems:'center', gap:10, marginBottom:32,
+              fontFamily:'var(--font-mono)', fontSize:12, letterSpacing:'0.12em',
+              padding:'8px 14px',
+              background:'linear-gradient(90deg, rgba(143,196,243,0.18), rgba(143,196,243,0.04))',
+              border:'1px solid rgba(143,196,243,0.3)', borderRadius:999,
+            }}>
+              <span style={{ width:8, height:8, background:'#3FE07A', borderRadius:'50%', boxShadow:'0 0 12px #3FE07A' }}/>
+              <span style={{ color:'var(--cielo)' }}>EN_OPERACIÓN_</span>
+              <span style={{ opacity:0.7 }}>· TASTIOTA · 27.9°N · 110.9°W</span>
+            </div>
+            <h1 style={{ fontSize:'clamp(48px,6.5vw,96px)', lineHeight:0.9, fontWeight:700, letterSpacing:'-0.035em', marginBottom:32, textWrap:'balance' }}>
+              Mantenemos<br/>
+              en línea cada<br/>
+              <span style={{ backgroundImage:'linear-gradient(90deg, #8FC4F3 0%, #4A87FF 100%)', WebkitBackgroundClip:'text', backgroundClip:'text', color:'transparent', fontStyle:'italic' }}>watt</span> de tu parque.
+            </h1>
+            <p style={{ fontSize:'clamp(16px,1.4vw,19px)', lineHeight:1.55, maxWidth:580, opacity:0.88, marginBottom:40 }}>
+              Deshierbe especializado y limpieza de paneles para parques solares a gran escala.
+              Operación medible — performance ratio, soiling, tiempos de respuesta —
+              reportada al asset manager cada semana.
+            </p>
+            <div style={{ display:'flex', gap:12, flexWrap:'wrap' }}>
+              <a href="#cotizacion" className="btn" style={{
+                background:'var(--cielo)', color:'var(--marino-deep)', padding:'18px 28px',
+                fontFamily:'var(--font-mono)', fontSize:14, letterSpacing:'0.08em',
+                borderRadius:2, fontWeight:700,
+                boxShadow:'0 12px 32px -8px rgba(143,196,243,0.5)',
+              }}>SOLICITAR PROPUESTA →</a>
+              <a href="#tastiota" className="btn" style={{
+                color:'#fff', border:'1px solid rgba(143,196,243,0.4)', padding:'18px 28px',
+                fontFamily:'var(--font-mono)', fontSize:14, letterSpacing:'0.08em', borderRadius:2,
+                background:'rgba(143,196,243,0.05)',
+              }}>VER TASTIOTA →</a>
+            </div>
+          </div>
+
+          {/* Right — fotos (oculto en mobile) */}
+          <div className="photo-stack" style={{ position:'relative', height:580 }}>
+            <div style={{ position:'absolute', top:0, right:0, width:'78%', aspectRatio:'4/5', borderRadius:4, overflow:'hidden', boxShadow:'0 32px 80px -16px rgba(0,0,0,0.5)', border:'2px solid var(--cielo)' }}>
+              <img src={P.tracker} alt="Trackers single-axis, Tastiota" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+              <div style={{ position:'absolute', inset:0, background:'linear-gradient(180deg, transparent 50%, rgba(10,20,84,0.6))' }}/>
+              <div style={{ position:'absolute', top:12, left:12, fontFamily:'var(--font-mono)', fontSize:10, letterSpacing:'0.14em', textShadow:'0 1px 2px rgba(0,0,0,0.6)' }}>IMG_001 · TRACKER_EJE_SIMPLE</div>
+            </div>
+            <div style={{ position:'absolute', bottom:24, left:0, width:'52%', aspectRatio:'4/3', borderRadius:4, overflow:'hidden', boxShadow:'0 24px 48px -16px rgba(0,0,0,0.6)', border:'2px solid #4A87FF' }}>
+              <img src={P.workerTrimmer} alt="Deshierbe operativo Tastiota" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+              <div style={{ position:'absolute', top:8, left:8, fontFamily:'var(--font-mono)', fontSize:9, letterSpacing:'0.14em', textShadow:'0 1px 2px rgba(0,0,0,0.6)' }}>IMG_002 · DESHIERBE_OPERATIVO</div>
+            </div>
+            <div style={{ position:'absolute', top:'38%', right:'-8%', background:'linear-gradient(135deg, #4A87FF 0%, #1F4FCC 100%)', color:'#fff', padding:'20px 26px', borderRadius:4, boxShadow:'0 24px 48px -8px rgba(74,135,255,0.5)', minWidth:220 }}>
+              <div style={{ fontSize:10, fontFamily:'var(--font-mono)', letterSpacing:'0.14em', opacity:0.9, marginBottom:8 }}>MÓDULOS_BAJO_LIMPIEZA</div>
+              <div className="tabular" style={{ fontSize:36, fontWeight:800, letterSpacing:'-0.02em', lineHeight:1 }}>288,580</div>
+              <div style={{ fontSize:11, fontFamily:'var(--font-mono)', opacity:0.85, marginTop:8 }}>Canadian Solar BiHiKu7</div>
+            </div>
+          </div>
+        </div>
+
+        {/* KPIs */}
+        <div className="kpi-grid">
+          {[
+            { label:'PANELES',       value:'288,580', unit:'u',    delta:'+100% propios', tone:'rgba(143,196,243,0.18)', accent:'var(--cielo)' },
+            { label:'SUPERFICIE',    value:'646,750', unit:'m²',   delta:'215 ha útiles',  tone:'rgba(74,135,255,0.2)',  accent:'#7AA8FF'       },
+            { label:'SLA',           value:'100',     unit:'%',    delta:'Por contrato',   tone:'rgba(31,155,90,0.2)',   accent:'#3FE07A'       },
+            { label:'EQUIPO_PROPIO', value:'0',       unit:'subs', delta:'Interno',        tone:'rgba(245,184,0,0.2)',   accent:'#FFD466'       },
+          ].map((k, i) => (
+            <div key={i} style={{ padding:'24px', background:k.tone, borderTop:`2px solid ${k.accent}`, display:'flex', flexDirection:'column', gap:6 }}>
+              <div style={{ fontSize:10, fontFamily:'var(--font-mono)', color:k.accent, letterSpacing:'0.14em' }}>{k.label}</div>
+              <div className="tabular" style={{ fontSize:'clamp(24px,2.5vw,32px)', fontWeight:700, letterSpacing:'-0.02em', display:'flex', alignItems:'baseline', gap:6 }}>
+                {k.value}<span style={{ fontSize:14, opacity:0.65, fontWeight:400 }}>{k.unit}</span>
+              </div>
+              <div style={{ fontSize:11, fontFamily:'var(--font-mono)', color:k.accent, opacity:0.95 }}>↑ {k.delta}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* ── SERVICIOS ── */}
+    <section id="servicios" style={{ padding:'var(--d-section) 0', background:'linear-gradient(180deg, #0A1454 0%, #122270 100%)', color:'#fff', position:'relative', overflow:'hidden' }}>
+      <div style={{ position:'absolute', top:'20%', right:'-200px', width:600, height:600, background:'radial-gradient(circle, rgba(143,196,243,0.18) 0%, transparent 65%)', pointerEvents:'none' }}/>
+      <div className="container" style={{ position:'relative' }}>
+        <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', marginBottom:48, flexWrap:'wrap', gap:16 }}>
+          <div>
+            <div style={{ fontSize:12, fontFamily:'var(--font-mono)', color:'var(--cielo)', letterSpacing:'0.12em', marginBottom:16 }}>// SERVICIOS.json</div>
+            <h2 style={{ fontSize:'clamp(36px,5.5vw,72px)', lineHeight:0.92, fontWeight:800, letterSpacing:'-0.03em' }}>
+              Deshierbe y limpieza.<br/>
+              <span style={{ backgroundImage:'linear-gradient(90deg, #8FC4F3, #4A87FF)', WebkitBackgroundClip:'text', backgroundClip:'text', color:'transparent' }}>Un solo SLA.</span>
+            </h2>
+          </div>
+          <div style={{ fontFamily:'var(--font-mono)', fontSize:12, color:'var(--cielo)', letterSpacing:'0.08em' }}>[02 / 02 ACTIVOS]</div>
+        </div>
+        <div className="services-grid">
+          {SERVICES.map((s, i) => {
+            const I = s.icon;
+            const photo = i === 0 ? P.workerTrimmer : P.panelAngle;
+            const accent = i === 0 ? 'var(--cielo)' : '#7AA8FF';
+            return (
+              <article key={i} style={{ background:'linear-gradient(180deg, rgba(143,196,243,0.08) 0%, rgba(143,196,243,0.02) 100%)', border:'1px solid rgba(143,196,243,0.2)', borderTop:`3px solid ${accent}`, display:'flex', flexDirection:'column' }}>
+                <div style={{ position:'relative', height:200, overflow:'hidden' }}>
+                  <img src={photo} alt={s.title} style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+                  <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg, rgba(10,20,84,0.55), transparent 60%)' }}/>
+                  <div style={{ position:'absolute', top:12, left:12, fontFamily:'var(--font-mono)', fontSize:11, letterSpacing:'0.14em', background:accent, color:'var(--marino-deep)', padding:'4px 10px', fontWeight:700 }}>SVC_0{i+1}</div>
+                </div>
+                <div style={{ padding:28, display:'flex', flexDirection:'column', gap:16, flex:1 }}>
+                  <div style={{ color:accent }}><I/></div>
+                  <div>
+                    <h3 style={{ fontSize:24, fontWeight:700, letterSpacing:'-0.01em' }}>{s.title}</h3>
+                    <div style={{ fontSize:12, color:accent, fontFamily:'var(--font-mono)', letterSpacing:'0.08em', marginTop:4 }}>{s.sub.toUpperCase()}</div>
+                  </div>
+                  <p style={{ fontSize:14, lineHeight:1.6, opacity:0.78 }}>{s.body}</p>
+                  <div style={{ display:'flex', gap:6, flexWrap:'wrap', marginTop:'auto', paddingTop:16, borderTop:'1px solid rgba(143,196,243,0.15)' }}>
+                    {s.tags.map(t => (
+                      <span key={t} style={{ fontSize:10, padding:'4px 10px', border:`1px solid ${accent}55`, fontFamily:'var(--font-mono)', letterSpacing:'0.04em', color:accent }}>{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    {/* ── TASTIOTA ── */}
+    <section id="tastiota" style={{ padding:'var(--d-section) 0', position:'relative', overflow:'hidden', background:'#0A1454', color:'#fff' }}>
+      <div style={{ position:'absolute', top:0, right:0, width:'40%', height:'100%', backgroundImage:`url(${P.tracker})`, backgroundSize:'cover', backgroundPosition:'center', opacity:0.25, pointerEvents:'none' }}/>
+      <div style={{ position:'absolute', top:0, right:0, width:'60%', height:'100%', background:'linear-gradient(90deg, #0A1454 30%, transparent 100%)', pointerEvents:'none' }}/>
+      <div style={{ position:'absolute', bottom:'-20%', left:'-10%', width:700, height:700, background:'radial-gradient(circle, rgba(74,135,255,0.3) 0%, transparent 65%)', pointerEvents:'none' }}/>
+
+      <div className="container" style={{ position:'relative' }}>
+        <div className="tastiota-section-header" style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', marginBottom:56 }}>
+          <div>
+            <div style={{ fontSize:12, fontFamily:'var(--font-mono)', color:'var(--cielo)', letterSpacing:'0.12em', marginBottom:12 }}>// CASO_ESTUDIO.live</div>
+            <h2 style={{ fontSize:'clamp(48px,7.5vw,104px)', lineHeight:0.88, fontWeight:800, letterSpacing:'-0.04em' }}>
+              TASTIOTA<span style={{ backgroundImage:'linear-gradient(90deg, #8FC4F3, #4A87FF)', WebkitBackgroundClip:'text', backgroundClip:'text', color:'transparent' }}>.</span>
+            </h2>
+          </div>
+          <div style={{ textAlign:'right' }}>
+            <div style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'var(--cielo)', letterSpacing:'0.12em', marginBottom:6 }}>ESTADO</div>
+            <div style={{ display:'flex', alignItems:'center', gap:8, justifyContent:'flex-end', padding:'8px 16px', background:'rgba(63,224,122,0.15)', border:'1px solid rgba(63,224,122,0.4)', borderRadius:999 }}>
+              <span style={{ width:8, height:8, background:'#3FE07A', borderRadius:'50%', boxShadow:'0 0 10px #3FE07A', flexShrink:0 }}/>
+              <span style={{ fontFamily:'var(--font-mono)', fontSize:13, letterSpacing:'0.08em' }}>EN_EJECUCIÓN</span>
+            </div>
+          </div>
+        </div>
+
+        <div style={{ background:'linear-gradient(135deg, rgba(143,196,243,0.06), rgba(74,135,255,0.04))', border:'1px solid rgba(143,196,243,0.25)', backdropFilter:'blur(12px)' }}>
+          <div className="tastiota-main-grid">
+            <div className="tastiota-left-panel" style={{ padding:40, borderRight:'1px solid rgba(143,196,243,0.2)' }}>
+              <h3 style={{ fontSize:32, fontWeight:700, marginBottom:8, letterSpacing:'-0.015em' }}>Parque Solar Caracolí</h3>
+              <p style={{ fontSize:13, fontFamily:'var(--font-mono)', color:'var(--cielo)', letterSpacing:'0.08em', marginBottom:24 }}>CLIENTE: REVERAU · REVERGY GROUP</p>
+              <p style={{ fontSize:16, lineHeight:1.65, opacity:0.88, marginBottom:28 }}>
+                Limpieza one-time de 288,580 paneles bifaciales sobre 215 ha útiles, con cumplimiento
+                de las especificaciones técnicas de Canadian Solar para preservar garantía.
+              </p>
+              <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:8 }}>
+                <div style={{ position:'relative', aspectRatio:'4/3', overflow:'hidden' }}>
+                  <img src={P.tallGrass} alt="Estado inicial — vegetación alta" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+                  <div style={{ position:'absolute', top:8, left:8, padding:'3px 8px', background:'#FFD466', color:'var(--marino-deep)', fontFamily:'var(--font-mono)', fontSize:9, fontWeight:700, letterSpacing:'0.12em' }}>ANTES</div>
+                </div>
+                <div style={{ position:'relative', aspectRatio:'4/3', overflow:'hidden' }}>
+                  <img src={P.rowClean} alt="Resultado — filas limpias" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+                  <div style={{ position:'absolute', top:8, left:8, padding:'3px 8px', background:'#3FE07A', color:'var(--marino-deep)', fontFamily:'var(--font-mono)', fontSize:9, fontWeight:700, letterSpacing:'0.12em' }}>DESPUÉS</div>
+                </div>
+              </div>
+            </div>
+            <div className="tastiota-data-grid">
+              {[
+                ['MÓDULOS',     '288,580',  'unidades',          'var(--cielo)'],
+                ['MODELO',      'BiHiKu7',  'CS7N-MB-AG',        '#7AA8FF'     ],
+                ['POTENCIA',    '640–665',  'W bifaciales',      '#A5C9FF'     ],
+                ['SUPERFICIE',  '646,750',  'm² · 215 ha',       'var(--cielo)'],
+                ['ESTRUCTURA',  'Tracker',  'single-axis',       '#7AA8FF'     ],
+                ['PLAZO',       '6',        'semanas',           '#3FE07A'     ],
+                ['CONTRATISTA', 'RODARDOS', 'Guaymas, Sonora',   'var(--cielo)'],
+                ['ALCANCE',     '3 SVC',    'limp+veg+caminos',  '#FFD466'     ],
+              ].map(([k, v, sub, accent], i) => (
+                <div key={i} style={{ padding:'24px 28px', borderBottom: i < 6 ? '1px solid rgba(143,196,243,0.15)' : 'none', borderRight: i % 2 === 0 ? '1px solid rgba(143,196,243,0.15)' : 'none' }}>
+                  <div style={{ fontSize:10, fontFamily:'var(--font-mono)', color:accent, letterSpacing:'0.14em', marginBottom:8 }}>{k}</div>
+                  <div className="tabular" style={{ fontSize:'clamp(20px,2.2vw,30px)', fontWeight:700, letterSpacing:'-0.02em', lineHeight:1 }}>{v}</div>
+                  <div style={{ fontSize:11, fontFamily:'var(--font-mono)', opacity:0.55, marginTop:6, letterSpacing:'0.04em' }}>{sub}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* ── DIFERENCIADORES ── */}
+    <section id="diferenciadores" style={{ padding:'var(--d-section) 0', background:'linear-gradient(180deg, #0A1454, #1F4FCC 200%)', color:'#fff', position:'relative', overflow:'hidden' }}>
+      <div className="container" style={{ position:'relative' }}>
+        <div style={{ fontSize:12, fontFamily:'var(--font-mono)', color:'var(--cielo)', letterSpacing:'0.12em', marginBottom:16 }}>// DIFERENCIADORES.js</div>
+        <h2 style={{ fontSize:'clamp(28px,4.5vw,64px)', lineHeight:1, fontWeight:800, letterSpacing:'-0.025em', marginBottom:56 }}>
+          Tres compromisos que firmamos,<br/>
+          <span style={{ backgroundImage:'linear-gradient(90deg, #8FC4F3, #4A87FF, #8FC4F3)', WebkitBackgroundClip:'text', backgroundClip:'text', color:'transparent' }}>ejecutamos y reportamos.</span>
+        </h2>
+        <div className="diff-grid">
+          {DIFERENCIADORES.map((d, i) => {
+            const I = d.icon;
+            const grad = i === 0 ? 'linear-gradient(135deg, rgba(143,196,243,0.22), rgba(143,196,243,0.04))'
+                       : i === 1 ? 'linear-gradient(135deg, rgba(74,135,255,0.25), rgba(74,135,255,0.04))'
+                       : 'linear-gradient(135deg, rgba(31,155,90,0.22), rgba(31,155,90,0.04))';
+            const accent = i === 0 ? 'var(--cielo)' : i === 1 ? '#7AA8FF' : '#3FE07A';
+            return (
+              <div key={i} style={{ padding:36, background:grad, border:`1px solid ${accent}40`, borderTop:`3px solid ${accent}`, minHeight:240, display:'flex', flexDirection:'column' }}>
+                <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', marginBottom:24 }}>
+                  <div style={{ color:accent }}><I/></div>
+                  <div className="tabular" style={{ fontFamily:'var(--font-mono)', fontSize:13, color:accent, letterSpacing:'0.08em' }}>DIFER_0{i+1}</div>
+                </div>
+                <h3 style={{ fontSize:26, fontWeight:700, marginBottom:12, letterSpacing:'-0.01em' }}>{d.title}</h3>
+                <p style={{ fontSize:15, lineHeight:1.6, opacity:0.82 }}>{d.body}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+
+    {/* ── COTIZACIÓN ── */}
+    <section id="cotizacion" style={{ padding:'var(--d-section) 0', background:'linear-gradient(180deg, #0A1454 0%, #050A2E 100%)', color:'#fff', position:'relative', overflow:'hidden' }}>
+      <div style={{ position:'absolute', top:'10%', right:'-15%', width:700, height:700, background:'radial-gradient(circle, rgba(143,196,243,0.2) 0%, transparent 65%)', pointerEvents:'none' }}/>
+      <div className="container" style={{ position:'relative' }}>
+        <div className="form-layout">
+          <div>
+            <div style={{ fontSize:12, fontFamily:'var(--font-mono)', color:'var(--cielo)', letterSpacing:'0.12em', marginBottom:16 }}>// SOLICITAR_COTIZACIÓN.form</div>
+            <h2 style={{ fontSize:'clamp(36px,4vw,60px)', lineHeight:0.95, fontWeight:800, letterSpacing:'-0.03em', marginBottom:24 }}>
+              Cotiza<br/>
+              <span style={{ backgroundImage:'linear-gradient(90deg, #8FC4F3, #4A87FF)', WebkitBackgroundClip:'text', backgroundClip:'text', color:'transparent' }}>tu parque.</span>
+            </h2>
+            <p style={{ fontSize:17, lineHeight:1.6, opacity:0.85, marginBottom:32 }}>
+              Respondemos en menos de 48 horas con propuesta técnico-económica:
+              alcance, plazo, equipo asignado, SLA y reporte semanal.
+            </p>
+            <div style={{ padding:24, background:'linear-gradient(135deg, rgba(143,196,243,0.12), rgba(143,196,243,0.02))', border:'1px solid rgba(143,196,243,0.3)', borderTop:'3px solid var(--cielo)' }}>
+              <div style={{ fontFamily:'var(--font-mono)', fontSize:11, color:'var(--cielo)', letterSpacing:'0.1em', marginBottom:12 }}>CONTACTO.directo</div>
+              <div style={{ fontSize:18, fontWeight:600 }}>mrodriguez@rodardos.com</div>
+              <div style={{ fontSize:14, opacity:0.8, marginTop:4 }}>+52 622 169 0609 · Guaymas, Sonora</div>
+            </div>
+          </div>
+          <form
+            className="form-fields"
+            style={{ background:'linear-gradient(135deg, rgba(143,196,243,0.08), rgba(74,135,255,0.04))', border:'1px solid rgba(143,196,243,0.25)', padding:40, backdropFilter:'blur(8px)', alignContent:'start' }}
+            onSubmit={(e) => {
+              e.preventDefault();
+              const fd = new FormData(e.target);
+              const d = Object.fromEntries(fd.entries());
+
+              const msg = [
+                'Buen día, me comunico a través del sitio web de RODARDOS Solar para solicitar una cotización.',
+                '',
+                '*Datos del proyecto:*',
+                `Proyecto: ${d.proyecto || '—'}`,
+                `Empresa: ${d.empresa || '—'}`,
+                `Rol: ${d.rol || '—'}`,
+                `Capacidad: ${d.mw || '—'} MW`,
+                `Módulos: ${d.mod || '—'}`,
+                `Estado: ${d.estado || '—'}`,
+                `Fecha objetivo: ${d.fecha || '—'}`,
+                `Correo de contacto: ${d.email || '—'}`,
+                '',
+                'Quedo en espera de su propuesta. Gracias.',
+              ].join('\n');
+              window.open('https://wa.me/526221690609?text=' + encodeURIComponent(msg), '_blank');
+
+              const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw-6f6AJRfbFe4ky6YoxhfRIC1fvgdh_B59XZhxlz1gMwqC_nfrfZdnE79Wrbg4v_erpQ/exec';
+              const iframe = document.createElement('iframe');
+              iframe.name = 'gs_iframe';
+              iframe.style.display = 'none';
+              document.body.appendChild(iframe);
+              const gForm = document.createElement('form');
+              gForm.method = 'POST';
+              gForm.action = APPS_SCRIPT_URL;
+              gForm.target = 'gs_iframe';
+              Object.entries(d).forEach(([k, v]) => {
+                const inp = document.createElement('input');
+                inp.type = 'hidden';
+                inp.name = k;
+                inp.value = v;
+                gForm.appendChild(inp);
+              });
+              document.body.appendChild(gForm);
+              gForm.submit();
+              setTimeout(() => {
+                document.body.removeChild(gForm);
+                document.body.removeChild(iframe);
+              }, 4000);
+
+              e.target.reset();
+            }}
+          >
+            {[
+              ['proyecto', 'NOMBRE DEL PROYECTO', 'Ej. Parque Solar Caracolí',  'span 2'],
+              ['empresa',  'EMPRESA',              'Nombre de tu empresa',       null    ],
+              ['rol',      'ROL',                  'Ej. Gerente de operaciones', null    ],
+              ['mw',       'CAPACIDAD (MW)',        'Ej. 180',                    null    ],
+              ['mod',      'NO. DE MÓDULOS',        'Ej. 288,580',               null    ],
+              ['estado',   'ESTADO',                'Ej. Sonora',                null    ],
+              ['fecha',    'FECHA OBJETIVO',        '',                           null    ],
+              ['email',    'CORREO ELECTRÓNICO',    'contacto@tuempresa.com',     'span 2'],
+            ].map(([id, label, ph, span]) => (
+              <div key={id} className="field" style={{ gridColumn: span || 'auto' }}>
+                <label style={{ fontFamily:'var(--font-mono)', color:'var(--cielo)', fontSize:11 }}>{label}</label>
+                <input
+                  id={id} name={id} placeholder={ph}
+                  type={id === 'fecha' ? 'date' : id === 'email' ? 'email' : 'text'}
+                />
+              </div>
+            ))}
+            <button type="submit" style={{ gridColumn:'span 2', padding:20, background:'linear-gradient(90deg, #8FC4F3 0%, #4A87FF 100%)', color:'var(--marino-deep)', fontFamily:'var(--font-mono)', fontWeight:800, letterSpacing:'0.08em', fontSize:14, border:'none', cursor:'pointer', borderRadius:0, boxShadow:'0 12px 32px -8px rgba(143,196,243,0.4)' }}>
+              ENVIAR SOLICITUD →
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    {/* ── FOOTER ── */}
+    <footer style={{ background:'#050A2E', color:'#fff', padding:'48px 0', borderTop:'1px solid rgba(143,196,243,0.25)' }}>
+      <div className="container footer-inner" style={{ display:'flex', justifyContent:'space-between', alignItems:'center', flexWrap:'wrap', gap:24 }}>
+        <RodardosWordmark color="#fff" arc="#8FC4F3"/>
+        <div className="footer-meta" style={{ display:'flex', gap:40, fontFamily:'var(--font-mono)', fontSize:12, letterSpacing:'0.08em', opacity:0.7, flexWrap:'wrap' }}>
+          <span>© 2026 RODARDOS S.A. DE C.V.</span>
+          <span style={{ color:'var(--cielo)' }}>DIVISIÓN_SOLAR</span>
+          <span>GUAYMAS · MX</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+);
+
+const App = () => (
+  <div id="top" className="page-root">
+    <Header/>
+    <Page/>
+  </div>
+);
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

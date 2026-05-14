@@ -1,7 +1,7 @@
 # RODARDOS Web — Contexto del proyecto
 
 ## Objetivo
-Diseñar la **home hi-fi** de la nueva división **RODARDOS Solar** — mantenimiento O&M para parques solares a gran escala. RODARDOS es una empresa de construcción/infraestructura en Guaymas, Sonora; el primer proyecto solar es el **Parque Solar Caracolí en Tastiota, Sonora** (cliente Reverau / Revergy Group).
+Diseñar la **home hi-fi** de la nueva división **RODARDOS Solar** — mantenimiento O&M para parques solares a gran escala. RODARDOS es una empresa de construcción/infraestructura en Guaymas, Sonora; el primer proyecto solar es el **Parque Solar Caracolí en Tastiota, Sonora** (cliente Revergy / Revergy Group).
 
 ## Audiencia
 Asset managers, EPCs y O&M managers de parques solares. Tono: institucional, técnico, confiable. Lectura tipo NextEra / Acciona / Array Technologies — no estilo startup.
@@ -16,7 +16,7 @@ Asset managers, EPCs y O&M managers de parques solares. Tono: institucional, té
 - Tipografía: sans grotesca para titulares (Inter Tight como fallback), mono para datos técnicos (JetBrains Mono).
 
 ## Datos clave del proyecto Tastiota (úsalos como verdad)
-- Cliente: **Reverau** (Revergy Group)
+- Cliente: **Revergy Group**
 - Parque: **Caracolí**, Tastiota, Sonora · MX
 - Módulos: **288,580** unidades · Canadian Solar **BiHiKu7** (CS7N-MB-AG)
 - Potencia: 640–665W bifaciales mono PERC
@@ -75,7 +75,7 @@ Persistencia via `__edit_mode_set_keys` + bloque `EDITMODE-BEGIN`/`EDITMODE-END`
 - Sustituir fotos Unsplash por reales (tomas aéreas del parque, equipo, robots y tractores)
 - Añadir: página Servicios (deep dive cada pilar), Proyectos, Nosotros, Contacto
 - Versión mobile responsive
-- Sumar testimoniales/firmas de cliente Reverau cuando sea posible
+- Sumar testimoniales/firmas de cliente Revergy cuando sea posible
 
 ## Stack técnico
 - HTML + React 18.3.1 (UMD) + Babel standalone — todo inline, sin build step.

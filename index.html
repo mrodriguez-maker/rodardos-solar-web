@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>RODARDOS Solar — Mantenimiento O&M de parques solares</title>
-<meta name="description" content="Limpieza de paneles, control de vegetación e inspección termográfica para parques solares a gran escala. Base Guaymas, Sonora. Equipo propio, SLA por contrato."/>
+<meta name="description" content="Limpieza de paneles y control de vegetación para parques solares a gran escala. Base Guaymas, Sonora. Equipo propio, SLA por contrato."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
@@ -335,14 +335,14 @@ const DIFERENCIADORES = [
   },
 ];
 
-/* Fotos Unsplash — funciona con internet */
 const P = {
-  rowClean:      'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=1600&q=80&auto=format&fit=crop',
-  tallGrass:     'https://images.unsplash.com/photo-1545209463-e2825498edbf?w=1600&q=80&auto=format&fit=crop',
-  workerTrimmer: 'https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?w=1600&q=80&auto=format&fit=crop',
-  tracker:       'https://images.unsplash.com/photo-1509391366360-2e959784a276?w=2000&q=80&auto=format&fit=crop',
-  panelAngle:    'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=1200&q=80&auto=format&fit=crop',
-  workerRow:     'https://images.unsplash.com/photo-1497440001374-f26997328c1b?w=1600&q=80&auto=format&fit=crop',
+  rowClean:      'assets/desh-01-row-clean.jpg',
+  tallGrass:     'assets/desh-02-tall-grass.jpg',
+  workerTrimmer: 'assets/desh-04-worker-trimmer.jpg',
+  tracker:       'assets/desh-06-tracker.jpg',
+  panelAngle:    'assets/desh-07-panel-angle.jpg',
+  workerRow:     'assets/desh-05-worker-row.jpg',
+  tractores:     'assets/tractores.jpeg',
 };
 
 /* ─────────────────────────────────────────
@@ -537,7 +537,7 @@ const Page = () => (
         <div className="services-grid">
           {SERVICES.map((s, i) => {
             const I = s.icon;
-            const photo = i === 0 ? P.workerTrimmer : P.panelAngle;
+            const photo = i === 0 ? P.tractores : P.panelAngle;
             const accent = i === 0 ? 'var(--cielo)' : '#7AA8FF';
             return (
               <article key={i} style={{ background:'linear-gradient(180deg, rgba(143,196,243,0.08) 0%, rgba(143,196,243,0.02) 100%)', border:'1px solid rgba(143,196,243,0.2)', borderTop:`3px solid ${accent}`, display:'flex', flexDirection:'column' }}>
@@ -600,11 +600,11 @@ const Page = () => (
               </p>
               <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:8 }}>
                 <div style={{ position:'relative', aspectRatio:'4/3', overflow:'hidden' }}>
-                  <img src={P.tallGrass} alt="Estado inicial — vegetación alta" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+                  <video src="assets/ANTES%20DESHIERBE.mp4" autoPlay muted loop playsInline preload="metadata" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
                   <div style={{ position:'absolute', top:8, left:8, padding:'3px 8px', background:'#FFD466', color:'var(--marino-deep)', fontFamily:'var(--font-mono)', fontSize:9, fontWeight:700, letterSpacing:'0.12em' }}>ANTES</div>
                 </div>
                 <div style={{ position:'relative', aspectRatio:'4/3', overflow:'hidden' }}>
-                  <img src={P.rowClean} alt="Resultado — filas limpias" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
+                  <video src="assets/DESPUES%20DESHIERBE.mp4" autoPlay muted loop playsInline preload="metadata" style={{ width:'100%', height:'100%', objectFit:'cover' }}/>
                   <div style={{ position:'absolute', top:8, left:8, padding:'3px 8px', background:'#3FE07A', color:'var(--marino-deep)', fontFamily:'var(--font-mono)', fontSize:9, fontWeight:700, letterSpacing:'0.12em' }}>DESPUÉS</div>
                 </div>
               </div>
@@ -616,7 +616,7 @@ const Page = () => (
                 ['POTENCIA',    '640–665',  'W bifaciales',      '#A5C9FF'     ],
                 ['SUPERFICIE',  '646,750',  'm² · 215 ha',       'var(--cielo)'],
                 ['ESTRUCTURA',  'Tracker',  'single-axis',       '#7AA8FF'     ],
-                ['PLAZO',       '6',        'semanas',           '#3FE07A'     ],
+                ['PLAZO',       '4',        'semanas',           '#3FE07A'     ],
                 ['CONTRATISTA', 'RODARDOS', 'Guaymas, Sonora',   'var(--cielo)'],
                 ['ALCANCE',     '3 SVC',    'limp+veg+caminos',  '#FFD466'     ],
               ].map(([k, v, sub, accent], i) => (
@@ -631,6 +631,28 @@ const Page = () => (
         </div>
       </div>
     </section>
+
+    {/* ── GALERÍA ── */}
+    <div style={{ background:'#071040', overflow:'hidden' }}>
+      <div style={{ display:'flex', gap:4, height:220 }}>
+        {[
+          { src:'assets/desh-08.jpg',    label:'TASTIOTA · 2026' },
+          { src:'assets/desh20.jpeg',    label:'DESHIERBE_OPS'   },
+          { src:'assets/desh29.jpeg',    label:'COBERTURA_TOTAL' },
+          { src:'assets/desh30.jpeg',    label:'FILAS_LIMPIAS'   },
+          { src:'assets/desh31.jpeg',    label:'PANEL_CLEAN'     },
+          { src:'assets/desh-13.jpg',    label:'EQUIPO_PROPIO'   },
+        ].map((img, i) => (
+          <div key={i} style={{ flex:1, position:'relative', overflow:'hidden', minWidth:0 }}>
+            <img src={img.src} alt={img.label} style={{ width:'100%', height:'100%', objectFit:'cover', filter:'brightness(0.75)', transition:'filter 0.3s ease' }}
+              onMouseEnter={e => e.currentTarget.style.filter = 'brightness(1)'}
+              onMouseLeave={e => e.currentTarget.style.filter = 'brightness(0.75)'}
+            />
+            <div style={{ position:'absolute', bottom:8, left:8, fontFamily:'var(--font-mono)', fontSize:9, letterSpacing:'0.12em', color:'rgba(255,255,255,0.7)' }}>{img.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
 
     {/* ── DIFERENCIADORES ── */}
     <section id="diferenciadores" style={{ padding:'var(--d-section) 0', background:'linear-gradient(180deg, #0A1454, #1F4FCC 200%)', color:'#fff', position:'relative', overflow:'hidden' }}>
